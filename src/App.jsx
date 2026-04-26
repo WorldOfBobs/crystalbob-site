@@ -1,3 +1,5 @@
+import { useEffect, useMemo, useState } from 'react'
+
 const liveSports = [
   {
     name: 'NBA',
@@ -31,37 +33,13 @@ const futureSports = [
   { name: 'Soccer', label: 'Coming later', sportKey: 'soccer' },
 ]
 
-const heroSignals = [
-  'NBA live now',
-  'MLB launches next',
-  'Tennis follows MLB',
-]
+const heroSignals = ['NBA live now', 'MLB launches next', 'Tennis follows MLB']
 
 const exportedBadges = [
-  {
-    name: 'Base shell',
-    note: 'Core brand shell for the whole system',
-    file: '/exports/crystalbob-base-shell.svg',
-    sportKey: 'core',
-  },
-  {
-    name: 'NBA badge',
-    note: 'Live launch badge',
-    file: '/exports/crystalbob-nba-badge.svg',
-    sportKey: 'nba',
-  },
-  {
-    name: 'MLB badge',
-    note: 'Next-up badge',
-    file: '/exports/crystalbob-mlb-badge.svg',
-    sportKey: 'mlb',
-  },
-  {
-    name: 'Tennis badge',
-    note: 'In-build badge',
-    file: '/exports/crystalbob-tennis-badge.svg',
-    sportKey: 'tennis',
-  },
+  { name: 'Base shell', note: 'Core brand shell for the whole system', file: '/exports/crystalbob-base-shell.svg', sportKey: 'core' },
+  { name: 'NBA badge', note: 'Live launch badge', file: '/exports/crystalbob-nba-badge.svg', sportKey: 'nba' },
+  { name: 'MLB badge', note: 'Next-up badge', file: '/exports/crystalbob-mlb-badge.svg', sportKey: 'mlb' },
+  { name: 'Tennis badge', note: 'In-build badge', file: '/exports/crystalbob-tennis-badge.svg', sportKey: 'tennis' },
 ]
 
 const walletChecks = [
@@ -72,10 +50,55 @@ const walletChecks = [
 ]
 
 const memberLaneStates = [
-  { lane: 'NBA', access: 'Unlocked now', note: 'Primary live lane for holders' },
-  { lane: 'MLB', access: 'Queued next', note: 'Will slot into the same shell' },
-  { lane: 'Tennis', access: 'In build', note: 'Structure exists, content follows' },
+  { lane: 'NBA', access: 'Unlocked now', note: 'Primary live lane for holders', route: 'lane/nba' },
+  { lane: 'MLB', access: 'Queued next', note: 'Will slot into the same shell', route: 'lane/mlb' },
+  { lane: 'Tennis', access: 'In build', note: 'Structure exists, content follows', route: 'lane/tennis' },
 ]
+
+const laneContent = {
+  nba: {
+    state: 'Live now',
+    headline: 'NBA holder dashboard',
+    copy: 'This is the flagship lane: live access, premium dashboards, and clean crystal-shell branding all the way through.',
+    stats: ['Daily edge board', 'Live holder access', 'Primary launch lane'],
+    cta: 'Open premium dashboard',
+  },
+  mlb: {
+    state: 'Queued next',
+    headline: 'MLB lane staged inside the same shell',
+    copy: 'The route exists now, but it should open with real baseball intel once the lane goes live instead of pretending it is ready today.',
+    stats: ['League shell ready', 'Totals-first lane', 'Next launch target'],
+    cta: 'Notify on launch',
+  },
+  tennis: {
+    state: 'In build',
+    headline: 'Tennis lane reserved for the next rollout',
+    copy: 'The member path now holds the place for match, set, and total-game intelligence without breaking the shared premium system.',
+    stats: ['Match markets', 'Set markets', 'Shared member shell'],
+    cta: 'Track build progress',
+  },
+}
+
+function getRouteFromHash() {
+  const hash = window.location.hash.replace(/^#\/?/, '')
+  return hash || 'home'
+}
+
+function useHashRoute() {
+  const [route, setRoute] = useState(() => getRouteFromHash())
+
+  useEffect(() => {
+    const onHashChange = () => setRoute(getRouteFromHash())
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
+  const navigate = (nextRoute) => {
+    window.location.hash = nextRoute === 'home' ? '/' : `/${nextRoute}`
+  }
+
+  return { route, navigate }
+}
 
 function CrystalBallMark({ sport = 'core', size = 'md', rotate = true }) {
   return (
@@ -104,7 +127,37 @@ function CrystalBallMark({ sport = 'core', size = 'md', rotate = true }) {
   )
 }
 
-function SportCard({ name, description, status, detail, sportKey, bullets }) {
+function RouteButton({ children, onClick, variant = 'primary', className = '', disabled = false }) {
+  const buttonClass = variant === 'secondary' ? 'secondary-button' : 'primary-button'
+  return (
+    <button className={`${buttonClass} ${className}`.trim()} onClick={onClick} disabled={disabled}>
+      {children}
+    </button>
+  )
+}
+
+function TopBar({ navigate, isMemberUnlocked }) {
+  return (
+    <header className="topbar">
+      <button className="brand-inline brand-inline-button" onClick={() => navigate('home')}>
+        <CrystalBallMark size="sm" rotate={false} />
+        <div className="brand-copy">
+          <span className="brand-mark">CrystalBob</span>
+          <span className="brand-pill">Token-gated sports club</span>
+        </div>
+      </button>
+      <div className="topbar-actions">
+        <button className="topbar-link" onClick={() => navigate('home')}>Home</button>
+        <button className="topbar-link" onClick={() => navigate('member')}>Member gate</button>
+        <button className="connect-button" onClick={() => navigate(isMemberUnlocked ? 'member/dashboard' : 'member')}>
+          {isMemberUnlocked ? 'Open member area' : 'Connect wallet'}
+        </button>
+      </div>
+    </header>
+  )
+}
+
+function SportCard({ name, description, status, detail, sportKey, bullets, onEnter }) {
   const badgeClass = `sport-badge sport-badge-${status.toLowerCase().replace(/\s+/g, '-')}`
 
   return (
@@ -123,7 +176,7 @@ function SportCard({ name, description, status, detail, sportKey, bullets }) {
           <li key={bullet}>{bullet}</li>
         ))}
       </ul>
-      <button className="sport-button">Enter sport</button>
+      <button className="sport-button" onClick={onEnter}>Enter sport</button>
     </article>
   )
 }
@@ -247,7 +300,7 @@ function SocialBannerPreview() {
   )
 }
 
-function WalletGateSection() {
+function WalletGateSection({ navigate, isMemberUnlocked, onVerify }) {
   return (
     <section className="section-block wallet-gate-section">
       <div className="section-heading">
@@ -260,9 +313,11 @@ function WalletGateSection() {
           <div className="wallet-panel-top">
             <div>
               <span className="wallet-status-pill">Member verify</span>
-              <h3>Connect wallet to unlock CrystalBob</h3>
+              <h3>{isMemberUnlocked ? 'Wallet verified. Holder area unlocked.' : 'Connect wallet to unlock CrystalBob'}</h3>
             </div>
-            <button className="primary-button wallet-button">Verify holder</button>
+            <RouteButton className="wallet-button" onClick={isMemberUnlocked ? () => navigate('member/dashboard') : onVerify}>
+              {isMemberUnlocked ? 'Open dashboard' : 'Verify holder'}
+            </RouteButton>
           </div>
           <p className="wallet-panel-copy">Use one obvious CTA, explain exactly what gets checked, and make the unlock feel immediate once the collection is confirmed.</p>
           <div className="wallet-check-grid">
@@ -320,6 +375,223 @@ function MemberAccessFlow() {
   )
 }
 
+function HomePage({ navigate, isMemberUnlocked, onVerify }) {
+  return (
+    <main>
+      <section className="hero hero-upgraded">
+        <div className="hero-copy">
+          <p className="eyebrow">CrystalBob.com</p>
+          <h1>Premium sports intel inside one crystal-ball system.</h1>
+          <p className="hero-text">
+            NBA is live now. MLB is next. Tennis follows. Every league drops into the same premium shell so the whole product feels gated, collectible, and dead consistent.
+          </p>
+          <div className="hero-actions">
+            <RouteButton onClick={isMemberUnlocked ? () => navigate('member/dashboard') : onVerify}>
+              {isMemberUnlocked ? 'Open member area' : 'Join with NFT'}
+            </RouteButton>
+            <RouteButton variant="secondary" onClick={() => navigate('member')}>
+              View member gate
+            </RouteButton>
+          </div>
+          <div className="hero-signal-row">
+            {heroSignals.map((signal) => (
+              <span key={signal} className="hero-signal-chip">{signal}</span>
+            ))}
+          </div>
+        </div>
+        <div className="hero-visual hero-visual-animated">
+          <div className="hero-crystal-stage">
+            <CrystalBallMark sport="core" size="hero" />
+            <div className="hero-orb-variants">
+              <CrystalBallMark sport="nba" size="xs" />
+              <CrystalBallMark sport="mlb" size="xs" />
+              <CrystalBallMark sport="tennis" size="xs" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <LeagueSystemPreview />
+      <BrandExports />
+
+      <section className="section-block live-section">
+        <div className="section-heading">
+          <p className="eyebrow">Launch lanes</p>
+          <h2>The first three sports getting real weight</h2>
+          <p>These are the active lanes that deserve the strong homepage treatment right now.</p>
+        </div>
+        <div className="sports-grid live-grid">
+          {liveSports.map((sport) => (
+            <SportCard key={sport.name} {...sport} onEnter={() => navigate(`lane/${sport.sportKey}`)} />
+          ))}
+        </div>
+      </section>
+
+      <section className="section-block coming-soon-wrap">
+        <div className="section-heading">
+          <p className="eyebrow">Future lanes</p>
+          <h2>Reserved without pretending they are ready</h2>
+          <p>They stay in the system, but they do not get fake launch energy.</p>
+        </div>
+        <div className="sports-grid compact future-grid">
+          {futureSports.map((sport) => (
+            <FutureSportCard key={sport.name} {...sport} />
+          ))}
+        </div>
+      </section>
+
+      <section className="gate-panel">
+        <div>
+          <p className="eyebrow">Member gate</p>
+          <h2>Token-gated by your collection</h2>
+          <p>Connect wallet, verify holder status, then unlock the sport lanes you are supposed to see. Public front door, private intel inside.</p>
+        </div>
+        <div className="gate-card">
+          <div className="gate-chip">Phase 2</div>
+          <ul>
+            <li>Public homepage</li>
+            <li>Real member route flow</li>
+            <li>Lane-specific member screens</li>
+            <li>Wallet verification UI staged</li>
+          </ul>
+        </div>
+      </section>
+
+      <WalletGateSection navigate={navigate} isMemberUnlocked={isMemberUnlocked} onVerify={onVerify} />
+      <MemberAccessFlow />
+      <SocialBannerPreview />
+
+      <section className="final-cta">
+        <div>
+          <p className="eyebrow">Final pass</p>
+          <h2>Homepage direction, badge family, banner system, and member routing finally line up.</h2>
+          <p>Now the public shell and the routed holder product feel like one product instead of a splash page with nowhere to go.</p>
+        </div>
+        <div className="final-cta-actions">
+          <RouteButton onClick={() => navigate('member/dashboard')}>Open routed member area</RouteButton>
+          <RouteButton variant="secondary" onClick={() => navigate('member')}>Review wallet gate</RouteButton>
+        </div>
+      </section>
+    </main>
+  )
+}
+
+function MemberPage({ navigate, isMemberUnlocked, onVerify }) {
+  return (
+    <main className="member-page-shell">
+      <section className="member-hero-route">
+        <div className="member-hero-copy">
+          <p className="eyebrow">Member route</p>
+          <h1>{isMemberUnlocked ? 'Holder access is unlocked.' : 'Verify once, then enter the holder side.'}</h1>
+          <p className="hero-text">
+            This route now acts like the real front door for the private side of CrystalBob. It gives the homepage somewhere intentional to send people.
+          </p>
+          <div className="hero-actions">
+            <RouteButton onClick={isMemberUnlocked ? () => navigate('member/dashboard') : onVerify}>
+              {isMemberUnlocked ? 'Open dashboard' : 'Verify holder now'}
+            </RouteButton>
+            <RouteButton variant="secondary" onClick={() => navigate('home')}>Back to homepage</RouteButton>
+          </div>
+        </div>
+        <div className="member-hero-card">
+          <div className="member-hero-card-top">
+            <CrystalBallMark sport="core" size="md" rotate={isMemberUnlocked} />
+            <div>
+              <span className={`wallet-status-pill ${isMemberUnlocked ? '' : 'wallet-status-pill-muted'}`}>
+                {isMemberUnlocked ? 'Holder verified' : 'Awaiting verify'}
+              </span>
+              <h3>Member checkpoint</h3>
+            </div>
+          </div>
+          <ul className="member-checkpoint-list">
+            <li>Clean route for the gated product</li>
+            <li>Verification CTA above the fold</li>
+            <li>Direct handoff into live lane pages</li>
+          </ul>
+        </div>
+      </section>
+
+      <WalletGateSection navigate={navigate} isMemberUnlocked={isMemberUnlocked} onVerify={onVerify} />
+    </main>
+  )
+}
+
+function MemberDashboard({ navigate }) {
+  return (
+    <main className="member-page-shell">
+      <section className="dashboard-shell">
+        <div className="section-heading">
+          <p className="eyebrow">Member dashboard</p>
+          <h2>Holder-only lanes, now behind a real route.</h2>
+          <p>This is the shared member shell. It can later plug into actual wallet state, data feeds, and gated dashboards without rethinking the whole site structure.</p>
+        </div>
+        <div className="dashboard-overview-grid">
+          {memberLaneStates.map((item) => (
+            <button key={item.lane} className="dashboard-lane-card" onClick={() => navigate(item.route)}>
+              <div>
+                <span className={`lane-state lane-state-${item.access.toLowerCase().replace(/\s+/g, '-')}`}>{item.access}</span>
+                <h3>{item.lane}</h3>
+                <p>{item.note}</p>
+              </div>
+              <span className="dashboard-lane-arrow">→</span>
+            </button>
+          ))}
+        </div>
+      </section>
+    </main>
+  )
+}
+
+function LanePage({ laneKey, navigate }) {
+  const lane = laneContent[laneKey]
+
+  if (!lane) {
+    return (
+      <main className="member-page-shell">
+        <section className="route-not-found">
+          <p className="eyebrow">Missing route</p>
+          <h2>That lane does not exist.</h2>
+          <RouteButton onClick={() => navigate('member/dashboard')}>Back to dashboard</RouteButton>
+        </section>
+      </main>
+    )
+  }
+
+  return (
+    <main className="member-page-shell">
+      <section className="lane-page-shell">
+        <div className="lane-page-header">
+          <div>
+            <p className="eyebrow">{laneKey.toUpperCase()} member lane</p>
+            <h1>{lane.headline}</h1>
+            <p className="hero-text">{lane.copy}</p>
+          </div>
+          <CrystalBallMark sport={laneKey} size="md" />
+        </div>
+        <div className="lane-page-grid">
+          <article className="lane-page-card lane-page-card-main">
+            <span className={`lane-state lane-state-${lane.state.toLowerCase().replace(/\s+/g, '-')}`}>{lane.state}</span>
+            <h3>Lane state</h3>
+            <p>This route is now real. Later, the actual data products can slot in here without breaking the top-level experience.</p>
+            <button className="sport-button">{lane.cta}</button>
+          </article>
+          <article className="lane-page-card">
+            <h3>What belongs here</h3>
+            <ul className="lane-stat-list">
+              {lane.stats.map((stat) => (
+                <li key={stat}>{stat}</li>
+              ))}
+            </ul>
+            <button className="secondary-button lane-back-button" onClick={() => navigate('member/dashboard')}>
+              Back to dashboard
+            </button>
+          </article>
+        </div>
+      </section>
+    </main>
+  )
+}
+
 function SiteFooter() {
   return (
     <footer className="site-footer">
@@ -340,116 +612,34 @@ function SiteFooter() {
 }
 
 export default function App() {
+  const { route, navigate } = useHashRoute()
+  const [isMemberUnlocked, setIsMemberUnlocked] = useState(false)
+
+  const normalizedRoute = route === '' ? 'home' : route
+  const activeView = useMemo(() => {
+    if (normalizedRoute === 'home') return 'home'
+    if (normalizedRoute === 'member') return 'member'
+    if (normalizedRoute === 'member/dashboard') return 'dashboard'
+    if (normalizedRoute.startsWith('lane/')) return 'lane'
+    return 'missing'
+  }, [normalizedRoute])
+
+  const activeLane = normalizedRoute.startsWith('lane/') ? normalizedRoute.split('/')[1] : null
+
+  const verifyAndEnter = () => {
+    setIsMemberUnlocked(true)
+    navigate('member/dashboard')
+  }
+
   return (
     <div className="page-shell">
-      <header className="topbar">
-        <div className="brand-inline">
-          <CrystalBallMark size="sm" rotate={false} />
-          <div className="brand-copy">
-            <span className="brand-mark">CrystalBob</span>
-            <span className="brand-pill">Token-gated sports club</span>
-          </div>
-        </div>
-        <button className="connect-button">Connect wallet</button>
-      </header>
+      <TopBar navigate={navigate} isMemberUnlocked={isMemberUnlocked} />
 
-      <main>
-        <section className="hero hero-upgraded">
-          <div className="hero-copy">
-            <p className="eyebrow">CrystalBob.com</p>
-            <h1>Premium sports intel inside one crystal-ball system.</h1>
-            <p className="hero-text">
-              NBA is live now. MLB is next. Tennis follows. Every league drops into the same premium shell so the whole product feels gated, collectible, and dead consistent.
-            </p>
-            <div className="hero-actions">
-              <button className="primary-button">Join with NFT</button>
-              <button className="secondary-button">View sports</button>
-            </div>
-            <div className="hero-signal-row">
-              {heroSignals.map((signal) => (
-                <span key={signal} className="hero-signal-chip">{signal}</span>
-              ))}
-            </div>
-          </div>
-          <div className="hero-visual hero-visual-animated">
-            <div className="hero-crystal-stage">
-              <CrystalBallMark sport="core" size="hero" />
-              <div className="hero-orb-variants">
-                <CrystalBallMark sport="nba" size="xs" />
-                <CrystalBallMark sport="mlb" size="xs" />
-                <CrystalBallMark sport="tennis" size="xs" />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <LeagueSystemPreview />
-
-        <BrandExports />
-
-        <section className="section-block live-section">
-          <div className="section-heading">
-            <p className="eyebrow">Launch lanes</p>
-            <h2>The first three sports getting real weight</h2>
-            <p>These are the active lanes that deserve the strong homepage treatment right now.</p>
-          </div>
-          <div className="sports-grid live-grid">
-            {liveSports.map((sport) => (
-              <SportCard key={sport.name} {...sport} />
-            ))}
-          </div>
-        </section>
-
-        <section className="section-block coming-soon-wrap">
-          <div className="section-heading">
-            <p className="eyebrow">Future lanes</p>
-            <h2>Reserved without pretending they are ready</h2>
-            <p>They stay in the system, but they do not get fake launch energy.</p>
-          </div>
-          <div className="sports-grid compact future-grid">
-            {futureSports.map((sport) => (
-              <FutureSportCard key={sport.name} {...sport} />
-            ))}
-          </div>
-        </section>
-
-        <section className="gate-panel">
-          <div>
-            <p className="eyebrow">Member gate</p>
-            <h2>Token-gated by your collection</h2>
-            <p>
-              Connect wallet, verify holder status, then unlock the sport lanes you are supposed to see. Public front door, private intel inside.
-            </p>
-          </div>
-          <div className="gate-card">
-            <div className="gate-chip">Phase 1</div>
-            <ul>
-              <li>Public homepage</li>
-              <li>Rotating crystal ball motion system</li>
-              <li>League-tab badge architecture</li>
-              <li>Wallet access flow next</li>
-            </ul>
-          </div>
-        </section>
-
-        <WalletGateSection />
-
-        <MemberAccessFlow />
-
-        <SocialBannerPreview />
-
-        <section className="final-cta">
-          <div>
-            <p className="eyebrow">Final pass</p>
-            <h2>Homepage direction, badge family, and banner system are finally lined up.</h2>
-            <p>Now the public shell and the member product can share one premium visual language instead of feeling pieced together.</p>
-          </div>
-          <div className="final-cta-actions">
-            <button className="primary-button">Lock launch assets</button>
-            <button className="secondary-button">Wire wallet gate UI</button>
-          </div>
-        </section>
-      </main>
+      {activeView === 'home' && <HomePage navigate={navigate} isMemberUnlocked={isMemberUnlocked} onVerify={verifyAndEnter} />}
+      {activeView === 'member' && <MemberPage navigate={navigate} isMemberUnlocked={isMemberUnlocked} onVerify={verifyAndEnter} />}
+      {activeView === 'dashboard' && <MemberDashboard navigate={navigate} />}
+      {activeView === 'lane' && <LanePage laneKey={activeLane} navigate={navigate} />}
+      {activeView === 'missing' && <LanePage laneKey={null} navigate={navigate} />}
 
       <SiteFooter />
     </div>

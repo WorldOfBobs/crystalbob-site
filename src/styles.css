@@ -33,6 +33,10 @@ button {
   font: inherit;
 }
 
+button:disabled {
+  opacity: 0.72;
+}
+
 .page-shell {
   min-height: 100vh;
   padding: 24px;
@@ -61,6 +65,46 @@ button {
   align-items: center;
   gap: 14px;
   flex-wrap: wrap;
+}
+
+.brand-inline-button,
+.topbar-link,
+.dashboard-lane-card {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: inherit;
+}
+
+.brand-inline-button {
+  cursor: pointer;
+  text-align: left;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.topbar-link {
+  cursor: pointer;
+  color: var(--text-dim);
+  padding: 8px 12px;
+}
+
+.topbar-link:hover {
+  color: var(--text);
+}
+
+.connect-button,
+.primary-button,
+.secondary-button,
+.sport-button,
+.topbar-link,
+.dashboard-lane-card {
+  transition: 0.2s ease;
 }
 
 .brand-copy {
@@ -106,7 +150,6 @@ button {
   padding: 12px 18px;
   border: 1px solid var(--border);
   cursor: pointer;
-  transition: 0.2s ease;
 }
 
 .connect-button,
@@ -471,6 +514,128 @@ button {
   gap: 14px;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.member-page-shell,
+.dashboard-shell,
+.lane-page-shell,
+.route-not-found {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.member-hero-route,
+.dashboard-shell,
+.lane-page-shell,
+.route-not-found {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 34px 0 0;
+  margin-top: 18px;
+}
+
+.member-hero-route {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.member-hero-card,
+.dashboard-lane-card,
+.lane-page-card,
+.route-not-found {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  backdrop-filter: blur(8px);
+}
+
+.member-hero-card,
+.lane-page-card,
+.route-not-found {
+  padding: 22px;
+}
+
+.member-hero-card-top,
+.lane-page-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.member-hero-card-top h3,
+.dashboard-lane-card h3,
+.lane-page-card h3,
+.route-not-found h2,
+.member-hero-copy h1,
+.lane-page-header h1 {
+  margin: 8px 0 10px;
+}
+
+.member-checkpoint-list,
+.lane-stat-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+.dashboard-overview-grid,
+.lane-page-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.dashboard-overview-grid {
+  margin-top: 18px;
+}
+
+.dashboard-lane-card {
+  text-align: left;
+  padding: 22px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.dashboard-lane-card:hover,
+.lane-page-card-main:hover {
+  border-color: rgba(255, 214, 0, 0.28);
+  transform: translateY(-3px);
+}
+
+.dashboard-lane-card p,
+.lane-page-card p,
+.member-hero-copy p,
+.route-not-found p {
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.dashboard-lane-arrow {
+  color: var(--gold-hot);
+  font-size: 1.4rem;
+}
+
+.lane-page-grid {
+  grid-template-columns: 1.2fr 0.8fr;
+  margin-top: 18px;
+}
+
+.lane-page-card-main {
+  transition: 0.2s ease;
+}
+
+.lane-back-button {
+  margin-top: 18px;
+}
+
+.route-not-found {
+  max-width: 680px;
 }
 
 .social-banner-actions {
@@ -988,7 +1153,10 @@ button {
   .export-grid,
   .banner-grid,
   .wallet-gate-grid,
-  .wallet-check-grid {
+  .wallet-check-grid,
+  .member-hero-route,
+  .dashboard-overview-grid,
+  .lane-page-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1000,7 +1168,8 @@ button {
     padding-top: 12px;
   }
 
-  .topbar {
+  .topbar,
+  .topbar-actions {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -1020,7 +1189,10 @@ button {
   .final-cta-actions,
   .wallet-panel-top,
   .wallet-side-head,
-  .member-lane-row {
+  .member-lane-row,
+  .member-hero-card-top,
+  .lane-page-header,
+  .dashboard-lane-card {
     align-items: flex-start;
     flex-direction: column;
   }
