@@ -1,0 +1,46 @@
+<svg width="1500" height="500" viewBox="0 0 1500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="80" y1="40" x2="1420" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#040404"/>
+      <stop offset="0.48" stop-color="#0B0B0A"/>
+      <stop offset="1" stop-color="#171205"/>
+    </linearGradient>
+    <radialGradient id="rightGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1195 225) rotate(153) scale(420 300)">
+      <stop stop-color="#FFF07A" stop-opacity="0.46"/>
+      <stop offset="0.42" stop-color="#FFD439" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#050505" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#FFF57E"/>
+      <stop offset="0.52" stop-color="#FFD53F"/>
+      <stop offset="1" stop-color="#BA8E00"/>
+    </linearGradient>
+  </defs>
+  <rect width="1500" height="500" rx="36" fill="url(#bg)"/>
+  <rect x="42" y="258" width="270" height="188" rx="94" fill="#090909" stroke="#272218" stroke-dasharray="12 12"/>
+  <text x="177" y="349" text-anchor="middle" fill="#726A53" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="2">PROFILE PHOTO</text>
+  <text x="177" y="382" text-anchor="middle" fill="#5D5746" font-family="Inter, Arial, sans-serif" font-size="17">Leave this area dead</text>
+  <path d="M600 98H1030" stroke="#FFF07A" stroke-opacity="0.15" stroke-width="1.5"/>
+  <path d="M600 398H1090" stroke="#FFF07A" stroke-opacity="0.12" stroke-width="1.5"/>
+  <circle cx="1186" cy="220" r="172" fill="url(#rightGlow)"/>
+  <circle cx="1186" cy="220" r="136" stroke="url(#gold)" stroke-width="9"/>
+  <circle cx="1186" cy="220" r="108" stroke="#FFE45B" stroke-opacity="0.34" stroke-width="4"/>
+  <circle cx="1186" cy="220" r="77" fill="#FFD842" fill-opacity="0.18"/>
+  <path d="M1140 173C1107 192 1101 267 1140 290" stroke="#17140A" stroke-opacity="0.45" stroke-width="7" stroke-linecap="round"/>
+  <path d="M1232 173C1265 192 1271 267 1232 290" stroke="#17140A" stroke-opacity="0.45" stroke-width="7" stroke-linecap="round"/>
+  <path d="M1144 195C1128 206 1120 218 1117 234" stroke="#17140A" stroke-opacity="0.28" stroke-width="4" stroke-linecap="round"/>
+  <path d="M1228 195C1244 206 1252 218 1255 234" stroke="#17140A" stroke-opacity="0.28" stroke-width="4" stroke-linecap="round"/>
+  <path d="M1170 352H1202C1235 352 1262 379 1262 412V417H1110V412C1110 379 1137 352 1170 352Z" fill="#FFD439" fill-opacity="0.28" stroke="url(#gold)" stroke-width="8" stroke-linejoin="round"/>
+  <rect x="1268" y="110" width="124" height="40" rx="20" fill="#15130A" stroke="#FFE45B" stroke-opacity="0.45"/>
+  <text x="1330" y="136" text-anchor="middle" fill="#FFF07A" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="3">TENNIS</text>
+  <text x="600" y="142" fill="#FFE45B" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="5">CRYSTALBOB</text>
+  <text x="600" y="228" fill="#F8F8F2" font-family="Inter, Arial, sans-serif" font-size="74" font-weight="800">Premium sports intel</text>
+  <text x="600" y="302" fill="#F8F8F2" font-family="Inter, Arial, sans-serif" font-size="74" font-weight="800">for holders only.</text>
+  <text x="600" y="350" fill="#BBB59D" font-family="Inter, Arial, sans-serif" font-size="23">One crystal-ball shell • NBA live now • MLB next • Tennis follows</text>
+  <rect x="600" y="388" width="146" height="42" rx="21" fill="#15130A" stroke="#FFE45B" stroke-opacity="0.38"/>
+  <rect x="760" y="388" width="148" height="42" rx="21" fill="#15130A" stroke="#FFE45B" stroke-opacity="0.38"/>
+  <rect x="922" y="388" width="164" height="42" rx="21" fill="#15130A" stroke="#FFE45B" stroke-opacity="0.38"/>
+  <text x="673" y="415" text-anchor="middle" fill="#FFF07A" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">NBA live</text>
+  <text x="834" y="415" text-anchor="middle" fill="#FFF07A" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">MLB next</text>
+  <text x="1004" y="415" text-anchor="middle" fill="#FFF07A" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Tennis build</text>
+</svg>
