@@ -231,185 +231,41 @@ function SportCard({ sport, navigate }) {
   )
 }
 
-function AccessStateSection() {
-  return (
-    <section className="access-state-section">
-      <div className="section-head">
-        <span className="eyebrow">Access flow</span>
-        <h2>Keep the product open now. Make the gate obvious later.</h2>
-        <p>
-          The shell should make sense before the wallet logic arrives. This gives you a clean public-preview path now without painting yourself into a weird crypto corner later.
-        </p>
-      </div>
-      <div className="access-state-grid">
-        {accessStates.map((item, index) => (
-          <article key={item.title} className="access-state-card">
-            <span className="access-step">0{index + 1}</span>
-            <h3>{item.title}</h3>
-            <p>{item.copy}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function LockedStateMock() {
-  return (
-    <section className="locked-mock-section">
-      <div className="section-head">
-        <span className="eyebrow">Locked-state preview</span>
-        <h2>What the gated experience can look like after preview mode ends.</h2>
-        <p>
-          This is just the mock shell for now, but it makes the next phase tangible: content still visible underneath, access requirement dead obvious on top.
-        </p>
-      </div>
-
-      <div className="locked-mock-shell">
-        <div className="locked-mock-board">
-          <div className="locked-line" />
-          <div className="locked-line short" />
-          <div className="locked-grid">
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
-        </div>
-
-        <div className="locked-mock-overlay">
-          <span className="pill pill-live">Wallet required soon</span>
-          <h3>Connect wallet to unlock CrystalBob</h3>
-          <p>
-            If the connected wallet does not hold <strong>{REQUIRED_ASSET}</strong>, this page stays blurred and locked.
-          </p>
-          <div className="hero-actions">
-            <button className="primary-button">Connect wallet</button>
-            <button className="secondary-button">View access rules</button>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function LaunchRoadmap() {
-  return (
-    <section className="launch-roadmap-section">
-      <div className="section-head">
-        <span className="eyebrow">Launch order</span>
-        <h2>One live lane. Everything else staged cleanly.</h2>
-      </div>
-      <div className="roadmap-row">
-        {launchSequence.map((item) => (
-          <article key={item.step} className="roadmap-card">
-            <span className="roadmap-step">{item.step}</span>
-            <h3>{item.title}</h3>
-            <p>{item.note}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
 function HomePage({ navigate }) {
-  const liveSport = sports.find((sport) => sport.status === 'live')
-  const comingSoonSports = sports.filter((sport) => sport.status !== 'live')
-
   return (
-    <main className="page page-home">
-      <section className="hero-section">
-        <div className="hero-copy">
+    <main className="page page-home compact-homepage">
+      <section className="compact-home-shell">
+        <div className="compact-home-left">
           <span className="eyebrow">CrystalBob sports club</span>
-          <h1>Simple front door. Premium sports intel behind it.</h1>
+          <LogoLockup compact />
+          <h1>Sports intel for holders.</h1>
           <p>
-            Landing page, clean sports grid, wallet gate later. For now NBA is fully open, the rest of the lanes are staged as coming soon, and the whole thing finally looks like one product.
+            Simple landing page. Wallet connect soon. NBA live now. Everything else staged cleanly.
           </p>
-          <div className="hero-actions">
+          <div className="hero-actions compact-actions">
             <button className="primary-button" onClick={() => navigate('/nba')}>Open NBA</button>
-            <a className="secondary-button" href="#sports">Browse sports</a>
+            <button className="secondary-button">Connect wallet soon</button>
           </div>
-          <div className="hero-micro-points">
-            <span>Public preview live</span>
-            <span>Wallet gate staged</span>
-            <span>One shell across all sports</span>
+          <div className="compact-preview-note">
+            <span className="pill pill-live">Public preview</span>
+            <span>NBA is open for everyone for a few days.</span>
           </div>
         </div>
 
-        <div className="hero-visual">
-          <LogoLockup />
-        </div>
-      </section>
-
-      <PreviewBanner />
-
-      <section className="featured-live-section">
-        <div className="section-head">
-          <span className="eyebrow">Live right now</span>
-          <h2>Lead with one real lane, not nine fake ones.</h2>
-        </div>
-        {liveSport && (
-          <button className="featured-live-card" onClick={() => navigate(liveSport.route)}>
-            <div className="featured-live-copy">
-              <span className="pill pill-live">{liveSport.shortStatus}</span>
-              <h3>{liveSport.name}</h3>
-              <p>{liveSport.description}</p>
-              <small>{liveSport.summary}</small>
-            </div>
-            <SportArtwork sport={liveSport} />
-          </button>
-        )}
-      </section>
-
-      <section className="sports-section" id="sports">
-        <div className="section-head">
-          <span className="eyebrow">Coming soon</span>
-          <h2>Everything else is visible, but honest.</h2>
-          <p>
-            No fake populated tabs. No pretending. Each lane exists now so the structure feels real, but only NBA is carrying live data until the rest are actually ready.
-          </p>
-        </div>
-
-        <div className="sports-grid">
-          {comingSoonSports.map((sport) => (
-            <SportCard key={sport.key} sport={sport} navigate={navigate} />
-          ))}
-        </div>
-      </section>
-
-      <LaunchRoadmap />
-
-      <section className="structure-grid">
-        <div className="structure-card">
-          <span className="eyebrow">Page structure</span>
-          <h3>What the final product wants to be</h3>
-          <ul>
-            <li>Clean landing page with logo, product copy, and wallet CTA</li>
-            <li>Dedicated sport pages under one consistent shell</li>
-            <li>Blurred lock state after preview with a big connect-wallet warning</li>
-            <li>Asset ownership check before protected results fully unlock</li>
-          </ul>
-        </div>
-
-        <WalletCard />
-      </section>
-
-      <AccessStateSection />
-
-      <LockedStateMock />
-
-      <section className="todo-section">
-        <div className="section-head">
-          <span className="eyebrow">Macro to-dos</span>
-          <h2>What I can keep knocking out next</h2>
-        </div>
-        <div className="todo-list">
-          {macroTodos.map((todo) => (
-            <div key={todo} className="todo-item">{todo}</div>
-          ))}
+        <div className="compact-home-right">
+          <div className="compact-sports-grid">
+            {sports.map((sport) => (
+              <button key={sport.key} className={`compact-sport-card ${sport.status}`} onClick={() => navigate(sport.route)}>
+                <div className="compact-sport-top">
+                  <strong>{sport.name}</strong>
+                  <span className={`compact-status ${sport.status}`}>{sport.status === 'live' ? 'Live' : 'Soon'}</span>
+                </div>
+                <div className="compact-sport-artwrap">
+                  <SportArtwork sport={sport} />
+                </div>
+              </button>
+            ))}
+          </div>
         </div>
       </section>
     </main>
@@ -534,9 +390,10 @@ export default function App() {
   const { route, navigate } = usePathRoute()
 
   const activeSport = useMemo(() => sports.find((sport) => sport.route === route), [route])
+  const isHome = route === '/'
 
   return (
-    <div className="app-shell">
+    <div className={`app-shell ${isHome ? 'home-shell' : ''}`}>
       <Header navigate={navigate} />
 
       {route === '/' && <HomePage navigate={navigate} />}
@@ -544,7 +401,7 @@ export default function App() {
       {route !== '/' && route !== '/nba' && activeSport && <ComingSoonPage sport={activeSport} navigate={navigate} />}
       {route !== '/' && !activeSport && route !== '/nba' && <MissingPage navigate={navigate} />}
 
-      <Footer />
+      {!isHome && <Footer />}
     </div>
   )
 }
