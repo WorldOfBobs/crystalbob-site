@@ -122,7 +122,8 @@ img {
 .coming-soon-panel,
 .featured-live-section,
 .access-state-section,
-.launch-roadmap-section {
+.launch-roadmap-section,
+.locked-mock-section {
   background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015));
   border: 1px solid var(--border);
   border-radius: 28px;
@@ -254,6 +255,7 @@ img {
 .featured-live-section,
 .access-state-section,
 .launch-roadmap-section,
+.locked-mock-section,
 .todo-section {
   padding: 20px 24px;
 }
@@ -535,6 +537,77 @@ img {
   border: 1px solid var(--border-strong);
 }
 
+.locked-mock-shell {
+  position: relative;
+  margin-top: 18px;
+  min-height: 360px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.05);
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+}
+
+.locked-mock-board {
+  position: absolute;
+  inset: 0;
+  padding: 28px;
+  filter: blur(9px) saturate(0.8);
+  opacity: 0.9;
+}
+
+.locked-line {
+  height: 22px;
+  width: 42%;
+  border-radius: 999px;
+  background: rgba(255, 225, 91, 0.18);
+  margin-bottom: 14px;
+}
+
+.locked-line.short {
+  width: 24%;
+  height: 14px;
+  background: rgba(255,255,255,0.08);
+  margin-bottom: 24px;
+}
+
+.locked-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.locked-grid span {
+  display: block;
+  min-height: 120px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 225, 91, 0.12), rgba(255,255,255,0.04));
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.locked-mock-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+  padding: 24px;
+  backdrop-filter: blur(18px);
+  background: rgba(5, 5, 5, 0.58);
+}
+
+.locked-mock-overlay h3 {
+  margin: 14px 0 10px;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  letter-spacing: -0.04em;
+}
+
+.locked-mock-overlay p {
+  max-width: 620px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
 .site-footer {
   display: flex;
   justify-content: space-between;
@@ -595,7 +668,8 @@ img {
   .todo-section,
   .featured-live-section,
   .access-state-section,
-  .launch-roadmap-section {
+  .launch-roadmap-section,
+  .locked-mock-section {
     padding: 20px;
   }
 

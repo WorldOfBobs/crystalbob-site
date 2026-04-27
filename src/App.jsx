@@ -254,6 +254,47 @@ function AccessStateSection() {
   )
 }
 
+function LockedStateMock() {
+  return (
+    <section className="locked-mock-section">
+      <div className="section-head">
+        <span className="eyebrow">Locked-state preview</span>
+        <h2>What the gated experience can look like after preview mode ends.</h2>
+        <p>
+          This is just the mock shell for now, but it makes the next phase tangible: content still visible underneath, access requirement dead obvious on top.
+        </p>
+      </div>
+
+      <div className="locked-mock-shell">
+        <div className="locked-mock-board">
+          <div className="locked-line" />
+          <div className="locked-line short" />
+          <div className="locked-grid">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+        </div>
+
+        <div className="locked-mock-overlay">
+          <span className="pill pill-live">Wallet required soon</span>
+          <h3>Connect wallet to unlock CrystalBob</h3>
+          <p>
+            If the connected wallet does not hold <strong>{REQUIRED_ASSET}</strong>, this page stays blurred and locked.
+          </p>
+          <div className="hero-actions">
+            <button className="primary-button">Connect wallet</button>
+            <button className="secondary-button">View access rules</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function LaunchRoadmap() {
   return (
     <section className="launch-roadmap-section">
@@ -357,6 +398,8 @@ function HomePage({ navigate }) {
       </section>
 
       <AccessStateSection />
+
+      <LockedStateMock />
 
       <section className="todo-section">
         <div className="section-head">
