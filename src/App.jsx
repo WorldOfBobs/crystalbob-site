@@ -205,15 +205,17 @@ function SportArtwork({ sport }) {
 
 function SportCard({ sport, navigate }) {
   return (
-    <button className={`sport-card ${sport.status}`} onClick={() => navigate(sport.route)}>
-      <div className="sport-card-top">
-        <span className={`pill ${sport.status === 'live' ? 'pill-live' : 'pill-muted'}`}>{sport.shortStatus}</span>
+    <button className={`compact-sport-card ${sport.status}`} onClick={() => navigate(sport.route)}>
+      <div className="compact-sport-artwrap">
+        <SportArtwork sport={sport} />
       </div>
-      <SportArtwork sport={sport} />
-      <div className="sport-card-copy">
-        <h3>{sport.name}</h3>
-        <p>{sport.description}</p>
-        <small>{sport.summary}</small>
+      <div className="compact-sport-meta">
+        <strong>{sport.name}</strong>
+        <span className={`compact-status ${sport.status}`}>{sport.status === 'live' ? 'Live now' : 'Staged'}</span>
+      </div>
+      <div className="compact-sport-hovercopy">
+        <p>{sport.summary}</p>
+        <small>{sport.description}</small>
       </div>
     </button>
   )
@@ -225,42 +227,27 @@ function HomePage({ navigate }) {
 
   return (
     <main className="page page-home compact-homepage">
-      <section className="compact-home-shell">
-        <div className="compact-home-left">
-          <span className="eyebrow">Live model dashboards</span>
-          <LogoLockup compact />
-          <h1>Serious sports model dashboards, all under one roof.</h1>
-          <p>
-            CrystalBob is the live shell for Gravy&apos;s sports model suite. NBA is live now. The rest of the lanes stay staged until each dashboard is ready for a real product pass.
-          </p>
-          <div className="hero-actions compact-actions">
-            <button className="primary-button" onClick={() => navigate('/nba')}>Open NBA</button>
-            <a className="secondary-button" href="#staged-lanes">View staged lanes</a>
-          </div>
-          <div className="compact-preview-note">
-            <span className="pill pill-live">Public preview</span>
-            <span>{liveSports.length} live lane · {stagedSports.length} staged lanes</span>
-          </div>
-          <div className="lane-summary" id="staged-lanes">
-            <strong>Currently staged:</strong>
-            <span>{stagedSports.map((sport) => sport.name).join(' · ')}</span>
-          </div>
+      <section className="home-hero-simple">
+        <span className="eyebrow">Live model dashboards</span>
+        <LogoLockup />
+        <p className="hero-tagline">Live model dashboards from Gravy, rebuilt into one clean shell.</p>
+        <div className="hero-actions compact-actions">
+          <button className="primary-button" onClick={() => navigate('/nba')}>Open NBA</button>
         </div>
+      </section>
 
-        <div className="compact-home-right">
-          <div className="compact-sports-grid">
-            {sports.map((sport) => (
-              <button key={sport.key} className={`compact-sport-card ${sport.status}`} onClick={() => navigate(sport.route)}>
-                <div className="compact-sport-top">
-                  <strong>{sport.name}</strong>
-                  <span className={`compact-status ${sport.status}`}>{sport.status === 'live' ? 'Live' : 'Staged'}</span>
-                </div>
-                <div className="compact-sport-artwrap">
-                  <SportArtwork sport={sport} />
-                </div>
-              </button>
-            ))}
+      <section className="sports-icon-section" id="staged-lanes">
+        <div className="sports-icon-header">
+          <div>
+            <span className="pill pill-live">{liveSports.length} live</span>
+            <span className="pill pill-muted">{stagedSports.length} staged</span>
           </div>
+          <p>Each lane keeps its own dashboard personality, but the shell, access layer, and polish all get standardized here.</p>
+        </div>
+        <div className="compact-sports-grid">
+          {sports.map((sport) => (
+            <SportCard key={sport.key} sport={sport} navigate={navigate} />
+          ))}
         </div>
       </section>
     </main>

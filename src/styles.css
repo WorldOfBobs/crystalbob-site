@@ -194,92 +194,67 @@ img {
   flex: 1;
 }
 
-.compact-home-shell {
-  min-height: calc(100vh - 120px);
+.home-hero-simple {
   display: grid;
-  grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
-  gap: 24px;
-  align-items: stretch;
-}
-
-.compact-home-left,
-.compact-home-right {
-  border: 1px solid var(--border);
-  border-radius: 28px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015));
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.24);
-  padding: 24px;
-}
-
-.compact-home-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-items: center;
   gap: 14px;
+  padding: 20px 0 10px;
+  text-align: center;
 }
 
-.compact-home-left .logo-lockup.compact {
-  width: 220px;
+.home-hero-simple .logo-lockup {
+  width: min(680px, 100%);
 }
 
-.compact-home-left h1 {
+.hero-tagline {
   margin: 0;
-  font-size: clamp(2.5rem, 5vw, 4.6rem);
-  line-height: 0.95;
-  letter-spacing: -0.05em;
-}
-
-.compact-home-left p,
-.compact-preview-note span:last-child {
+  max-width: 760px;
   color: var(--muted);
   line-height: 1.6;
+  font-size: clamp(1rem, 2vw, 1.15rem);
 }
 
 .compact-actions {
   margin-top: 4px;
 }
 
-.compact-preview-note {
+.sports-icon-section {
+  display: grid;
+  gap: 18px;
+  padding-top: 6px;
+}
+
+.sports-icon-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sports-icon-header > div {
+  display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 
-.lane-summary {
-  display: grid;
-  gap: 6px;
-  margin-top: 4px;
-  padding: 14px 16px;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 225, 91, 0.16);
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.lane-summary strong {
-  font-size: 0.92rem;
-  color: var(--gold-soft);
-}
-
-.lane-summary span {
+.sports-icon-header p {
+  margin: 0;
   color: var(--muted);
-  line-height: 1.5;
-  font-size: 0.95rem;
-}
-
-.compact-home-right {
-  display: flex;
-  align-items: stretch;
+  max-width: 760px;
+  line-height: 1.55;
 }
 
 .compact-sports-grid {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 130px));
+  justify-content: center;
+  gap: 14px;
 }
 
 .compact-sport-card {
+  position: relative;
   text-align: left;
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: 20px;
@@ -290,22 +265,30 @@ img {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  min-height: 0;
+  width: 130px;
+  min-height: 164px;
+  overflow: hidden;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 }
 
-.compact-sport-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  align-items: center;
+.compact-sport-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 225, 91, 0.24);
+  background: rgba(255,255,255,0.04);
 }
 
-.compact-sport-top strong {
-  font-size: 0.85rem;
+.compact-sport-meta {
+  display: grid;
+  gap: 4px;
+}
+
+.compact-sport-meta strong {
+  font-size: 0.82rem;
+  line-height: 1.15;
 }
 
 .compact-status {
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--gold-soft);
@@ -316,15 +299,51 @@ img {
 }
 
 .compact-sport-artwrap {
-  flex: 1;
   display: flex;
+  justify-content: center;
 }
 
 .compact-sport-artwrap .sport-art,
 .compact-sport-artwrap .fallback-badge {
   width: 100%;
-  min-height: 0;
+  max-width: 94px;
   aspect-ratio: 1;
+}
+
+.compact-sport-hovercopy {
+  position: absolute;
+  inset: auto 8px 8px 8px;
+  padding: 10px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(9,9,9,0.72), rgba(9,9,9,0.94));
+  border: 1px solid rgba(255, 225, 91, 0.16);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+}
+
+.compact-sport-card:hover .compact-sport-hovercopy {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.compact-sport-hovercopy p,
+.compact-sport-hovercopy small {
+  margin: 0;
+  display: block;
+  line-height: 1.35;
+}
+
+.compact-sport-hovercopy p {
+  color: var(--text);
+  font-size: 0.7rem;
+  margin-bottom: 6px;
+}
+
+.compact-sport-hovercopy small {
+  color: var(--muted);
+  font-size: 0.64rem;
 }
 
 .primary-button,
