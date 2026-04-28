@@ -289,6 +289,7 @@ img {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 130px));
   justify-content: start;
+  justify-items: start;
   gap: 14px;
 }
 
@@ -705,7 +706,13 @@ img {
     padding: 16px;
   }
 
-  .site-header,
+  .site-header {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
   .site-footer,
   .frame-topbar {
     flex-direction: column;
@@ -713,7 +720,9 @@ img {
   }
 
   .header-actions {
-    justify-content: flex-start;
+    justify-content: flex-end;
+    align-self: flex-start;
+    margin-left: auto;
   }
 
   .hero-section,
@@ -730,7 +739,8 @@ img {
 
   .compact-sports-grid.grouped-grid {
     grid-template-columns: repeat(2, minmax(0, 130px));
-    justify-content: center;
+    justify-content: start;
+    justify-items: start;
   }
 
   .hero-copy h1,

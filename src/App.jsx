@@ -168,10 +168,10 @@ function Header({ navigate }) {
 
       <div className="header-actions">
         <button className="social-placeholder" type="button" aria-label="Discord">
-          <img src="/final-brand-assets/social/crystalbob-discord-icon.svg" alt="Discord" className="social-icon-image" />
+          <img src="/final-brand-assets/social/crystalbob-discord-icon-final.png" alt="Discord" className="social-icon-image" />
         </button>
         <button className="social-placeholder" type="button" aria-label="X">
-          <img src="/final-brand-assets/social/crystalbob-x-icon.svg" alt="X" className="social-icon-image" />
+          <img src="/final-brand-assets/social/crystalbob-x-icon-final.png" alt="X" className="social-icon-image" />
         </button>
         <button className="wallet-button" type="button">Connect wallet</button>
       </div>
