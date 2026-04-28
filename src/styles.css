@@ -3,13 +3,13 @@
   --bg-soft: #0d0d0d;
   --panel: rgba(255, 255, 255, 0.04);
   --panel-strong: rgba(255, 255, 255, 0.06);
-  --border: rgba(255, 225, 91, 0.18);
-  --border-strong: rgba(255, 225, 91, 0.34);
+  --border: rgba(245, 255, 59, 0.18);
+  --border-strong: rgba(245, 255, 59, 0.34);
   --text: #f6f3de;
   --muted: #bdb69b;
-  --gold: #ffd63b;
-  --gold-soft: #fff07a;
-  --shadow: rgba(255, 214, 59, 0.18);
+  --gold: #f5ff3b;
+  --gold-soft: #fbff9a;
+  --shadow: rgba(245, 255, 59, 0.18);
 }
 
 * {
@@ -90,7 +90,7 @@ img {
 }
 
 .brand-wordmark {
-  color: #FFD600;
+  color: #F5FF3B;
   font-weight: 800;
   letter-spacing: -0.03em;
 }
@@ -132,7 +132,7 @@ img {
 .wallet-button {
   border-radius: 999px;
   padding: 9px 13px;
-  border: 1px solid rgba(255, 225, 91, 0.16);
+  border: 1px solid rgba(245, 255, 59, 0.16);
   background: linear-gradient(180deg, var(--gold-soft), var(--gold));
   color: #050505;
   font-weight: 800;
