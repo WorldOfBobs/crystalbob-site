@@ -11,8 +11,8 @@ const sports = [
     key: 'nba',
     name: 'NBA',
     status: 'live',
-    shortStatus: 'Live now',
-    category: 'Live now',
+    shortStatus: 'Live Now',
+    category: 'Live Now',
     description: 'Full public preview of the live NBA dashboard for the next few days.',
     summary: 'Live quant board with the real dashboard already running.',
     asset: '/exports/finals/crystalbob-basketball-final.jpg',
@@ -22,8 +22,8 @@ const sports = [
     key: 'mlb',
     name: 'Baseball',
     status: 'coming-soon',
-    shortStatus: 'Coming soon',
-    category: 'Coming soon',
+    shortStatus: 'Coming Soon',
+    category: 'Coming Soon',
     description: '',
     summary: '',
     asset: '/exports/finals/crystalbob-baseball-final.png',
@@ -33,8 +33,8 @@ const sports = [
     key: 'golf',
     name: 'Golf',
     status: 'coming-soon',
-    shortStatus: 'Coming soon',
-    category: 'Coming soon',
+    shortStatus: 'Coming Soon',
+    category: 'Coming Soon',
     description: '',
     summary: '',
     asset: '/exports/finals/crystalbob-golf-final.png',
@@ -120,8 +120,8 @@ const sports = [
 ]
 
 const sportGroups = [
-  { key: 'live', label: 'Live now' },
-  { key: 'coming-soon', label: 'Coming soon' },
+  { key: 'live', label: 'Live Now' },
+  { key: 'coming-soon', label: 'Coming Soon' },
   { key: 'staged', label: 'Staged' },
 ]
 
@@ -158,6 +158,25 @@ function LogoLockup({ compact = false }) {
   )
 }
 
+function SocialIcon({ kind }) {
+  if (kind === 'discord') {
+    return (
+      <svg viewBox="0 0 24 24" className="social-icon" aria-hidden="true">
+        <path d="M8 8.5C9.6 7.6 11 7.3 12 7.3C13 7.3 14.4 7.6 16 8.5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+        <path d="M7 9.5C6.3 10.7 5.9 12.2 5.8 13.8C7 14.7 8.1 15.2 9.3 15.6C9.7 15 10 14.4 10.2 13.8M17 9.5C17.7 10.7 18.1 12.2 18.2 13.8C17 14.7 15.9 15.2 14.7 15.6C14.3 15 14 14.4 13.8 13.8" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="9.7" cy="12.2" r="0.9" fill="currentColor" />
+        <circle cx="14.3" cy="12.2" r="0.9" fill="currentColor" />
+      </svg>
+    )
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" className="social-icon" aria-hidden="true">
+      <path d="M5 18L10.3 12.3L6.1 6H9.6L12.2 10L15.9 6H19L13.6 11.8L18 18H14.5L11.7 14L8 18H5Z" fill="currentColor" />
+    </svg>
+  )
+}
+
 function Header({ navigate }) {
   return (
     <header className="site-header">
@@ -167,8 +186,12 @@ function Header({ navigate }) {
       </button>
 
       <div className="header-actions">
-        <button className="social-placeholder" type="button">Discord</button>
-        <button className="social-placeholder" type="button">X</button>
+        <button className="social-placeholder" type="button" aria-label="Discord">
+          <SocialIcon kind="discord" />
+        </button>
+        <button className="social-placeholder" type="button" aria-label="X">
+          <SocialIcon kind="x" />
+        </button>
         <button className="wallet-button" type="button">Connect wallet</button>
       </div>
     </header>
@@ -249,9 +272,9 @@ function HomePage({ navigate }) {
       <section className="sports-icon-section" id="staged-lanes">
         <div className="sports-icon-header">
           {groupedSports.map((group) => (
-            <div key={group.key} className="status-pill-group">
-              <span className={`pill ${group.key === 'live' ? 'pill-live' : 'pill-muted'}`}>{group.sports.length}</span>
-              <span className="status-pill-label">{group.label}</span>
+            <div key={group.key} className="status-summary-item">
+              <strong>{group.sports.length}</strong>
+              <span>{group.label}</span>
             </div>
           ))}
         </div>
@@ -261,7 +284,6 @@ function HomePage({ navigate }) {
             <section key={group.key} className="sports-group-block">
               <div className="sports-group-head">
                 <h3>{group.label}</h3>
-                <span>{group.sports.length} lane{group.sports.length === 1 ? '' : 's'}</span>
               </div>
               <div className="compact-sports-grid grouped-grid">
                 {group.sports.map((sport) => (
