@@ -24,8 +24,8 @@ const sports = [
     status: 'coming-soon',
     shortStatus: 'Coming soon',
     category: 'Coming soon',
-    description: 'Baseball lane is next once the NBA formula is locked.',
-    summary: 'Next lane up once the shared shell and branding pass are finalized.',
+    description: '',
+    summary: '',
     asset: '/exports/finals/crystalbob-baseball-final.png',
     route: '/mlb',
   },
@@ -35,8 +35,8 @@ const sports = [
     status: 'coming-soon',
     shortStatus: 'Coming soon',
     category: 'Coming soon',
-    description: 'Tournament and matchup lane reserved for the next product push.',
-    summary: 'Compact event-driven board built for outrights, matchups, and timing.',
+    description: '',
+    summary: '',
     asset: '/exports/finals/crystalbob-golf-final.png',
     route: '/golf',
   },
@@ -221,11 +221,7 @@ function SportCard({ sport, navigate }) {
       </div>
       <div className="compact-sport-meta">
         <strong>{sport.name}</strong>
-        <span className={`compact-status ${sport.status}`}>{sport.status === 'live' ? 'Live now' : 'Staged'}</span>
-      </div>
-      <div className="compact-sport-hovercopy">
-        <p>{sport.summary}</p>
-        <small>{sport.description}</small>
+        <span className={`compact-status ${sport.status}`}>{sport.shortStatus}</span>
       </div>
     </button>
   )

@@ -86,6 +86,8 @@ img {
 .brand-icon {
   width: 42px;
   height: 42px;
+  object-fit: contain;
+  object-position: center;
 }
 
 .page {
@@ -185,6 +187,13 @@ img {
 
 .home-hero-simple .logo-lockup {
   width: min(680px, 100%);
+}
+
+.logo-lockup img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
 }
 
 .hero-tagline {
@@ -320,43 +329,6 @@ img {
   width: 100%;
   max-width: 94px;
   aspect-ratio: 1;
-}
-
-.compact-sport-hovercopy {
-  position: absolute;
-  inset: auto 8px 8px 8px;
-  padding: 10px;
-  border-radius: 14px;
-  background: linear-gradient(180deg, rgba(9,9,9,0.72), rgba(9,9,9,0.94));
-  border: 1px solid rgba(255, 225, 91, 0.16);
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.18s ease, transform 0.18s ease;
-  pointer-events: none;
-  text-align: left;
-}
-
-.compact-sport-card:hover .compact-sport-hovercopy {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.compact-sport-hovercopy p,
-.compact-sport-hovercopy small {
-  margin: 0;
-  display: block;
-  line-height: 1.35;
-}
-
-.compact-sport-hovercopy p {
-  color: var(--text);
-  font-size: 0.7rem;
-  margin-bottom: 6px;
-}
-
-.compact-sport-hovercopy small {
-  color: var(--muted);
-  font-size: 0.64rem;
 }
 
 .primary-button,
@@ -511,8 +483,8 @@ img {
   object-fit: contain;
   object-position: center;
   border-radius: 18px;
-  background: #050505;
-  border: 1px solid rgba(255,255,255,0.05);
+  background: transparent;
+  border: 0;
   padding: 10px;
 }
 
