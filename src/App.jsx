@@ -12,101 +12,117 @@ const sports = [
     name: 'NBA',
     status: 'live',
     shortStatus: 'Live now',
+    category: 'Live now',
     description: 'Full public preview of the live NBA dashboard for the next few days.',
+    summary: 'Live quant board with the real dashboard already running.',
     asset: '/exports/finals/crystalbob-basketball-final.jpg',
-    summary: 'Exact live dashboard from nba.bobbrowser.com inside the CrystalBob shell.',
     route: '/nba',
   },
   {
     key: 'mlb',
-    name: 'MLB',
+    name: 'Baseball',
     status: 'coming-soon',
-    shortStatus: 'Staged',
-    description: 'Baseball lane staged next with totals, sides, and card summaries.',
+    shortStatus: 'Coming soon',
+    category: 'Coming soon',
+    description: 'Baseball lane is next once the NBA formula is locked.',
+    summary: 'Next lane up once the shared shell and branding pass are finalized.',
     asset: '/exports/finals/crystalbob-baseball-final.png',
-    summary: 'Next serious lane after NBA.',
     route: '/mlb',
-  },
-  {
-    key: 'nhl',
-    name: 'NHL',
-    status: 'coming-soon',
-    shortStatus: 'Staged',
-    description: 'Hockey lane reserved and waiting for the real product pass.',
-    asset: '/exports/finals/crystalbob-hockey-final.png',
-    summary: 'Staged, not live yet.',
-    route: '/nhl',
-  },
-  {
-    key: 'tennis',
-    name: 'Tennis',
-    status: 'coming-soon',
-    shortStatus: 'Staged',
-    description: 'Match, set, and total-game intelligence in the same premium shell.',
-    asset: '/exports/finals/crystalbob-tennis-final.png',
-    summary: 'Brand-ready, product later.',
-    route: '/tennis',
   },
   {
     key: 'golf',
     name: 'Golf',
     status: 'coming-soon',
-    shortStatus: 'Staged',
-    description: 'Tournament and matchup lane reserved.',
+    shortStatus: 'Coming soon',
+    category: 'Coming soon',
+    description: 'Tournament and matchup lane reserved for the next product push.',
+    summary: 'Compact event-driven board built for outrights, matchups, and timing.',
     asset: '/exports/finals/crystalbob-golf-final.png',
-    summary: 'Staged, not live yet.',
     route: '/golf',
+  },
+  {
+    key: 'nhl',
+    name: 'NHL',
+    status: 'staged',
+    shortStatus: 'Staged',
+    category: 'Staged',
+    description: 'Hockey lane reserved and waiting for the real product pass.',
+    summary: 'Structured for sides, totals, and situational reads without clutter.',
+    asset: '/exports/finals/crystalbob-hockey-final.png',
+    route: '/nhl',
+  },
+  {
+    key: 'tennis',
+    name: 'Tennis',
+    status: 'staged',
+    shortStatus: 'Staged',
+    category: 'Staged',
+    description: 'Match, set, and total-game intelligence in the same premium shell.',
+    summary: 'Built for fast reads on matches, sets, totals, and pressure moments.',
+    asset: '/exports/finals/crystalbob-tennis-final.png',
+    route: '/tennis',
   },
   {
     key: 'mma',
     name: 'MMA',
-    status: 'coming-soon',
+    status: 'staged',
     shortStatus: 'Staged',
+    category: 'Staged',
     description: 'Fight card lane reserved for eventual event-day drops.',
+    summary: 'Event-card format tuned for fast reads instead of bloated fight pages.',
     asset: '/exports/finals/crystalbob-mma-final.png',
-    summary: 'Brand-ready, product later.',
     route: '/mma',
   },
   {
     key: 'soccer',
     name: 'Soccer',
-    status: 'coming-soon',
+    status: 'staged',
     shortStatus: 'Staged',
+    category: 'Staged',
     description: 'Global football lane reserved for future rollout.',
+    summary: 'Designed for clean card scanning across leagues without a noisy layout.',
     asset: '/exports/finals/crystalbob-soccer-final.png',
-    summary: 'Staged, not live yet.',
     route: '/soccer',
   },
   {
     key: 'cricket',
     name: 'Cricket',
-    status: 'coming-soon',
+    status: 'staged',
     shortStatus: 'Staged',
+    category: 'Staged',
     description: 'Cricket lane reserved for cards, totals, and matchup structure later.',
+    summary: 'Built to surface the signal quickly instead of burying it in score noise.',
     asset: '/exports/finals/crystalbob-cricket-final.png',
-    summary: 'Brand-ready, product later.',
     route: '/cricket',
   },
   {
     key: 'table-tennis',
     name: 'Table Tennis',
-    status: 'coming-soon',
+    status: 'staged',
     shortStatus: 'Staged',
+    category: 'Staged',
     description: 'Table tennis lane staged inside the same gated shell.',
+    summary: 'Fast, high-frequency board style for markets that move hard and early.',
     asset: '/exports/finals/crystalbob-table-tennis-final.png',
-    summary: 'Staged, not live yet.',
     route: '/table-tennis',
   },
   {
     key: 'racing',
     name: 'Racing',
-    status: 'coming-soon',
+    status: 'staged',
     shortStatus: 'Staged',
+    category: 'Staged',
     description: 'Racing lane reserved for event-driven drops and future data passes.',
+    summary: 'Event-driven view designed for sharp race-day scanning and quick decisions.',
     asset: '/exports/finals/crystalbob-racing-final.png',
-    summary: 'Staged, not live yet.',
     route: '/racing',
   },
+]
+
+const sportGroups = [
+  { key: 'live', label: 'Live now' },
+  { key: 'coming-soon', label: 'Coming soon' },
+  { key: 'staged', label: 'Staged' },
 ]
 
 function normalizeRoute(pathname) {
@@ -149,12 +165,6 @@ function Header({ navigate }) {
         <img src={BRAND_ORB} alt="CrystalBob icon" className="brand-icon" />
         <span>CrystalBob</span>
       </button>
-
-      <nav className="header-nav">
-        <button onClick={() => navigate('/')}>Home</button>
-        <button onClick={() => navigate('/nba')}>NBA</button>
-        <a href="#access">Access</a>
-      </nav>
     </header>
   )
 }
@@ -222,31 +232,41 @@ function SportCard({ sport, navigate }) {
 }
 
 function HomePage({ navigate }) {
-  const liveSports = sports.filter((sport) => sport.status === 'live')
-  const stagedSports = sports.filter((sport) => sport.status !== 'live')
+  const groupedSports = sportGroups.map((group) => ({
+    ...group,
+    sports: sports.filter((sport) => sport.status === group.key),
+  }))
 
   return (
     <main className="page page-home compact-homepage">
       <section className="home-hero-simple">
-        <span className="eyebrow">Live model dashboards</span>
         <LogoLockup />
-        <p className="hero-tagline">Live model dashboards from Gravy, rebuilt into one clean shell.</p>
-        <div className="hero-actions compact-actions">
-          <button className="primary-button" onClick={() => navigate('/nba')}>Open NBA</button>
-        </div>
+        <p className="hero-tagline">Serious sports dashboards from Gravy, rebuilt into one clean shell.</p>
       </section>
 
       <section className="sports-icon-section" id="staged-lanes">
         <div className="sports-icon-header">
-          <div>
-            <span className="pill pill-live">{liveSports.length} live</span>
-            <span className="pill pill-muted">{stagedSports.length} staged</span>
-          </div>
-          <p>Each lane keeps its own dashboard personality, but the shell, access layer, and polish all get standardized here.</p>
+          {groupedSports.map((group) => (
+            <div key={group.key} className="status-pill-group">
+              <span className={`pill ${group.key === 'live' ? 'pill-live' : 'pill-muted'}`}>{group.sports.length}</span>
+              <span className="status-pill-label">{group.label}</span>
+            </div>
+          ))}
         </div>
-        <div className="compact-sports-grid">
-          {sports.map((sport) => (
-            <SportCard key={sport.key} sport={sport} navigate={navigate} />
+
+        <div className="sports-groups-wrap">
+          {groupedSports.map((group) => (
+            <section key={group.key} className="sports-group-block">
+              <div className="sports-group-head">
+                <h3>{group.label}</h3>
+                <span>{group.sports.length} lane{group.sports.length === 1 ? '' : 's'}</span>
+              </div>
+              <div className="compact-sports-grid grouped-grid">
+                {group.sports.map((sport) => (
+                  <SportCard key={sport.key} sport={sport} navigate={navigate} />
+                ))}
+              </div>
+            </section>
           ))}
         </div>
       </section>
