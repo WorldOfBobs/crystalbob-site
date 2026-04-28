@@ -19,111 +19,112 @@ const sports = [
     key: 'mlb',
     name: 'MLB',
     status: 'coming-soon',
-    shortStatus: 'Coming soon',
+    shortStatus: 'Staged',
     description: 'Baseball lane staged next with totals, sides, and card summaries.',
     asset: '/exports/finals/crystalbob-baseball-final.png',
-    summary: 'First wave after NBA.',
+    summary: 'Next serious lane after NBA.',
     route: '/mlb',
   },
   {
     key: 'nhl',
     name: 'NHL',
     status: 'coming-soon',
-    shortStatus: 'Coming soon',
+    shortStatus: 'Staged',
     description: 'Hockey lane reserved and waiting for the real product pass.',
     asset: '/exports/finals/crystalbob-hockey-final.png',
-    summary: 'Queued behind the first rollout.',
+    summary: 'Staged, not live yet.',
     route: '/nhl',
-  },
-  {
-    key: 'ncaab',
-    name: 'NCAAB',
-    status: 'coming-soon',
-    shortStatus: 'Coming soon',
-    description: 'College hoops lane reserved for the next serious pass.',
-    summary: 'Tournament-ready structure later.',
-    route: '/ncaab',
   },
   {
     key: 'tennis',
     name: 'Tennis',
     status: 'coming-soon',
-    shortStatus: 'Coming soon',
+    shortStatus: 'Staged',
     description: 'Match, set, and total-game intelligence in the same premium shell.',
     asset: '/exports/finals/crystalbob-tennis-final.png',
-    summary: 'Asset is ready; product lane follows later.',
+    summary: 'Brand-ready, product later.',
     route: '/tennis',
   },
   {
     key: 'golf',
     name: 'Golf',
     status: 'coming-soon',
-    shortStatus: 'Coming soon',
+    shortStatus: 'Staged',
     description: 'Tournament and matchup lane reserved.',
     asset: '/exports/finals/crystalbob-golf-final.png',
-    summary: 'Waiting on product pass and visuals.',
+    summary: 'Staged, not live yet.',
     route: '/golf',
   },
   {
     key: 'mma',
     name: 'MMA',
     status: 'coming-soon',
-    shortStatus: 'Coming soon',
+    shortStatus: 'Staged',
     description: 'Fight card lane reserved for eventual event-day drops.',
     asset: '/exports/finals/crystalbob-mma-final.jpg',
-    summary: 'Structure only for now.',
+    summary: 'Brand-ready, product later.',
     route: '/mma',
   },
   {
     key: 'soccer',
     name: 'Soccer',
     status: 'coming-soon',
-    shortStatus: 'Coming soon',
+    shortStatus: 'Staged',
     description: 'Global football lane reserved for future rollout.',
     asset: '/exports/finals/crystalbob-soccer-final.png',
-    summary: 'Will slot into the same access system.',
+    summary: 'Staged, not live yet.',
     route: '/soccer',
   },
   {
     key: 'esports',
     name: 'Esports',
     status: 'coming-soon',
-    shortStatus: 'Coming soon',
+    shortStatus: 'Staged',
     description: 'Esports lane reserved once the product is real, not fake-launched.',
     asset: '/exports/finals/crystalbob-esports-final.png',
-    summary: 'Held until it deserves the real treatment.',
+    summary: 'Held until the lane is real.',
     route: '/esports',
   },
-]
-
-const accessStates = [
   {
-    title: 'Public preview now',
-    copy: 'Everyone can open NBA for a few days while the shell, messaging, and access flow get tightened.',
+    key: 'boxing',
+    name: 'Boxing',
+    status: 'coming-soon',
+    shortStatus: 'Staged',
+    description: 'Fight-night lane reserved inside the same CrystalBob shell.',
+    asset: '/exports/finals/crystalbob-boxing-final.png',
+    summary: 'Staged, not live yet.',
+    route: '/boxing',
   },
   {
-    title: 'Connect wallet next',
-    copy: 'Users will still see the page structure, but a clear wallet-connect gate takes over protected results.',
+    key: 'cricket',
+    name: 'Cricket',
+    status: 'coming-soon',
+    shortStatus: 'Staged',
+    description: 'Cricket lane reserved for cards, totals, and matchup structure later.',
+    asset: '/exports/finals/crystalbob-cricket-final.png',
+    summary: 'Brand-ready, product later.',
+    route: '/cricket',
   },
   {
-    title: 'Asset check after that',
-    copy: `If the wallet does not hold ${REQUIRED_ASSET}, the lane stays faded and locked.`,
+    key: 'table-tennis',
+    name: 'Table Tennis',
+    status: 'coming-soon',
+    shortStatus: 'Staged',
+    description: 'Table tennis lane staged inside the same gated shell.',
+    asset: '/exports/finals/crystalbob-table-tennis-final.png',
+    summary: 'Staged, not live yet.',
+    route: '/table-tennis',
   },
-]
-
-const launchSequence = [
-  { step: '01', title: 'NBA live', note: 'Real dashboard populated now.' },
-  { step: '02', title: 'MLB next', note: 'First follow-up lane after launch week.' },
-  { step: '03', title: 'Remaining sports staged', note: 'Tennis, Golf, MMA, Soccer, Esports, NHL, and NCAAB stay honest as coming soon.' },
-]
-
-const macroTodos = [
-  'Wire real wallet connect + disconnect state',
-  'Add holder verification against the required asset',
-  'Replace public preview with blurred lock overlay once gating starts',
-  'Port NBA into a native CrystalBob layout instead of relying on iframe forever',
-  'Create final assets for NHL, NCAAB, Golf, MMA, Soccer, and Esports cards',
-  'Build real coming-soon pages into launch-ready sport dashboards one by one',
+  {
+    key: 'racing',
+    name: 'Racing',
+    status: 'coming-soon',
+    shortStatus: 'Staged',
+    description: 'Racing lane reserved for event-driven drops and future data passes.',
+    asset: '/exports/finals/crystalbob-racing-final.png',
+    summary: 'Staged, not live yet.',
+    route: '/racing',
+  },
 ]
 
 function normalizeRoute(pathname) {
@@ -241,11 +242,11 @@ function HomePage({ navigate }) {
     <main className="page page-home compact-homepage">
       <section className="compact-home-shell">
         <div className="compact-home-left">
-          <span className="eyebrow">CrystalBob sports club</span>
+          <span className="eyebrow">Live model dashboards</span>
           <LogoLockup compact />
-          <h1>Sports intel for holders.</h1>
+          <h1>Live sports dashboards for holders.</h1>
           <p>
-            Simple landing page. Wallet connect soon. NBA live now. Everything else staged cleanly.
+            NBA is live now inside CrystalBob. The rest of the lanes are staged honestly and will go live one by one as the real products are ready.
           </p>
           <div className="hero-actions compact-actions">
             <button className="primary-button" onClick={() => navigate('/nba')}>Open NBA</button>
@@ -263,7 +264,7 @@ function HomePage({ navigate }) {
               <button key={sport.key} className={`compact-sport-card ${sport.status}`} onClick={() => navigate(sport.route)}>
                 <div className="compact-sport-top">
                   <strong>{sport.name}</strong>
-                  <span className={`compact-status ${sport.status}`}>{sport.status === 'live' ? 'Live' : 'Soon'}</span>
+                  <span className={`compact-status ${sport.status}`}>{sport.status === 'live' ? 'Live' : 'Staged'}</span>
                 </div>
                 <div className="compact-sport-artwrap">
                   <SportArtwork sport={sport} />
@@ -333,9 +334,9 @@ function ComingSoonPage({ sport, navigate }) {
       <section className="sport-hero">
         <div>
           <span className="eyebrow">{sport.name} lane</span>
-          <h1>{sport.name} is coming soon</h1>
+          <h1>{sport.name} is staged</h1>
           <p>
-            The route is live, the shell is ready, and the final gated product can drop in here later without rebuilding the site again.
+            The route and brand shell are ready, but this lane is not live yet. It stays visible so the full CrystalBob product map is clear without pretending the underlying dashboard exists today.
           </p>
           <div className="hero-actions">
             <button className="primary-button" onClick={() => navigate('/nba')}>View live NBA preview</button>
@@ -347,7 +348,7 @@ function ComingSoonPage({ sport, navigate }) {
 
       <section className="coming-soon-panel">
         <div className="coming-soon-copy">
-          <span className="pill pill-muted">Coming soon</span>
+          <span className="pill pill-muted">Staged lane</span>
           <h2>{sport.name} will plug into the same wallet-gated shell</h2>
           <p>{sport.description}</p>
         </div>
@@ -384,7 +385,7 @@ function Footer() {
     <footer className="site-footer">
       <div>
         <strong>CrystalBob</strong>
-        <p>Live NBA preview now. Wallet gating next.</p>
+        <p>NBA live now. Additional lanes staged honestly.</p>
       </div>
       <span>crystalbob.com</span>
     </footer>

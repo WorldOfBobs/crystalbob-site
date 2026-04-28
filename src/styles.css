@@ -197,7 +197,7 @@ img {
 .compact-home-shell {
   min-height: calc(100vh - 120px);
   display: grid;
-  grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.1fr);
+  grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
   gap: 24px;
   align-items: stretch;
 }
@@ -254,7 +254,7 @@ img {
 .compact-sports-grid {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -263,12 +263,12 @@ img {
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: 20px;
   background: rgba(255,255,255,0.025);
-  padding: 12px;
+  padding: 10px;
   color: inherit;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   min-height: 0;
 }
 
@@ -280,11 +280,11 @@ img {
 }
 
 .compact-sport-top strong {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
 }
 
 .compact-status {
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--gold-soft);
@@ -639,9 +639,12 @@ img {
     grid-template-columns: 1fr;
   }
 
-  .sports-grid,
-  .compact-sports-grid {
+  .sports-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .compact-sports-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .sport-hero-badge,
