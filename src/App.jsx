@@ -11,7 +11,7 @@ const sports = [
     status: 'live',
     shortStatus: 'Live now',
     description: 'Full public preview of the live NBA dashboard for the next few days.',
-    asset: '/exports/crystalbob-nba-badge.svg',
+    asset: '/exports/finals/crystalbob-basketball-final.png',
     summary: 'Exact live dashboard from nba.bobbrowser.com inside the CrystalBob shell.',
     route: '/nba',
   },
@@ -21,7 +21,7 @@ const sports = [
     status: 'coming-soon',
     shortStatus: 'Coming soon',
     description: 'Baseball lane staged next with totals, sides, and card summaries.',
-    asset: '/exports/crystalbob-mlb-badge.svg',
+    asset: '/exports/finals/crystalbob-baseball-final.png',
     summary: 'First wave after NBA.',
     route: '/mlb',
   },
@@ -31,6 +31,7 @@ const sports = [
     status: 'coming-soon',
     shortStatus: 'Coming soon',
     description: 'Hockey lane reserved and waiting for the real product pass.',
+    asset: '/exports/finals/crystalbob-hockey-final.png',
     summary: 'Queued behind the first rollout.',
     route: '/nhl',
   },
@@ -49,7 +50,7 @@ const sports = [
     status: 'coming-soon',
     shortStatus: 'Coming soon',
     description: 'Match, set, and total-game intelligence in the same premium shell.',
-    asset: '/exports/crystalbob-tennis-badge.svg',
+    asset: '/exports/finals/crystalbob-tennis-final.png',
     summary: 'Asset is ready; product lane follows later.',
     route: '/tennis',
   },
@@ -59,6 +60,7 @@ const sports = [
     status: 'coming-soon',
     shortStatus: 'Coming soon',
     description: 'Tournament and matchup lane reserved.',
+    asset: '/exports/finals/crystalbob-golf-final.png',
     summary: 'Waiting on product pass and visuals.',
     route: '/golf',
   },
@@ -68,6 +70,7 @@ const sports = [
     status: 'coming-soon',
     shortStatus: 'Coming soon',
     description: 'Fight card lane reserved for eventual event-day drops.',
+    asset: '/exports/finals/crystalbob-mma-final.jpg',
     summary: 'Structure only for now.',
     route: '/mma',
   },
@@ -77,6 +80,7 @@ const sports = [
     status: 'coming-soon',
     shortStatus: 'Coming soon',
     description: 'Global football lane reserved for future rollout.',
+    asset: '/exports/finals/crystalbob-soccer-final.png',
     summary: 'Will slot into the same access system.',
     route: '/soccer',
   },
@@ -86,6 +90,7 @@ const sports = [
     status: 'coming-soon',
     shortStatus: 'Coming soon',
     description: 'Esports lane reserved once the product is real, not fake-launched.',
+    asset: '/exports/finals/crystalbob-esports-final.png',
     summary: 'Held until it deserves the real treatment.',
     route: '/esports',
   },
@@ -300,7 +305,7 @@ function NbaPage() {
             <a className="primary-button" href={NBA_DASHBOARD_URL} target="_blank" rel="noreferrer">Open in new tab</a>
           </div>
         </div>
-        <img src="/exports/crystalbob-nba-badge.svg" alt="NBA badge" className="sport-hero-badge" />
+        <img src="/exports/finals/crystalbob-basketball-final.png" alt="NBA badge" className="sport-hero-badge" />
       </section>
 
       <PreviewBanner />
