@@ -62,12 +62,12 @@ img {
   top: 0;
   z-index: 40;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 20px;
   padding: 12px 0 18px;
   backdrop-filter: blur(10px);
-  background: linear-gradient(180deg, rgba(5,5,5,0.92), rgba(5,5,5,0.45));
+  background: linear-gradient(180deg, rgba(5,5,5,0.94), rgba(5,5,5,0.54));
 }
 
 .brand-button {
@@ -88,6 +88,49 @@ img {
   height: 42px;
   object-fit: contain;
   object-position: center;
+  filter: saturate(1.08) brightness(1.06);
+}
+
+.brand-wordmark {
+  color: var(--gold-soft);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.social-placeholder,
+.wallet-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 225, 91, 0.16);
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+.social-placeholder {
+  background: rgba(255,255,255,0.03);
+  color: var(--gold-soft);
+}
+
+.wallet-button {
+  background: linear-gradient(180deg, var(--gold-soft), var(--gold));
+  color: #050505;
+  font-weight: 800;
+  box-shadow: 0 0 20px var(--shadow);
+}
+
+.social-placeholder:hover,
+.wallet-button:hover {
+  transform: translateY(-1px);
 }
 
 .page {
@@ -661,8 +704,7 @@ img {
   .hero-section,
   .sport-hero,
   .structure-grid,
-  .coming-soon-panel,
-  .compact-home-shell {
+  .coming-soon-panel {
     grid-template-columns: 1fr;
   }
 
@@ -670,8 +712,8 @@ img {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .compact-sports-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .compact-sports-grid.grouped-grid {
+    grid-template-columns: repeat(3, minmax(0, 130px));
   }
 
   .sport-hero-badge,
@@ -690,7 +732,11 @@ img {
   .site-footer,
   .frame-topbar {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+  }
+
+  .header-actions {
+    justify-content: center;
   }
 
   .hero-section,
@@ -701,25 +747,18 @@ img {
   .featured-live-section,
   .access-state-section,
   .launch-roadmap-section,
-  .locked-mock-section,
-  .compact-home-left,
-  .compact-home-right {
+  .locked-mock-section {
     padding: 20px;
   }
 
-  .sports-grid,
-  .compact-sports-grid {
-    grid-template-columns: 1fr;
+  .compact-sports-grid.grouped-grid {
+    grid-template-columns: repeat(2, minmax(0, 130px));
+    justify-content: center;
   }
 
   .hero-copy h1,
-  .sport-hero h1,
-  .compact-home-left h1 {
+  .sport-hero h1 {
     font-size: clamp(2.4rem, 12vw, 3.5rem);
-  }
-
-  .compact-home-shell {
-    min-height: auto;
   }
 
   .iframe-wrap,

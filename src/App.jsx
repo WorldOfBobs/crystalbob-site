@@ -163,8 +163,14 @@ function Header({ navigate }) {
     <header className="site-header">
       <button className="brand-button" onClick={() => navigate('/')}>
         <img src={BRAND_ORB} alt="CrystalBob icon" className="brand-icon" />
-        <span>CrystalBob</span>
+        <span className="brand-wordmark">CrystalBob</span>
       </button>
+
+      <div className="header-actions">
+        <button className="social-placeholder" type="button">Discord</button>
+        <button className="social-placeholder" type="button">X</button>
+        <button className="wallet-button" type="button">Connect wallet</button>
+      </div>
     </header>
   )
 }
