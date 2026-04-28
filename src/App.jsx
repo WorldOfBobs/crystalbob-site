@@ -4,7 +4,7 @@ const PUBLIC_PREVIEW = true
 const REQUIRED_ASSET = 'CrystalBob access asset'
 const NBA_DASHBOARD_URL = 'https://nba.bobbrowser.com'
 const BRAND_LOCKUP = '/final-brand-assets/black-bg/crystalbob-lockup.png'
-const BRAND_ORB = '/final-brand-assets/transparent/crystalbob-orb.png'
+const BRAND_ORB = '/final-brand-assets/black-bg/crystalbob-orb.png'
 
 const sports = [
   {
