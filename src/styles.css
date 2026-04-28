@@ -120,8 +120,8 @@ img {
 }
 
 .social-icon-image {
-  width: 20px;
-  height: 20px;
+  width: 23px;
+  height: 23px;
   object-fit: contain;
   object-position: center;
 }
@@ -738,8 +738,8 @@ img {
   }
 
   .social-icon-image {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
   }
 
   .header-actions .social-placeholder:last-of-type .social-icon-image {
