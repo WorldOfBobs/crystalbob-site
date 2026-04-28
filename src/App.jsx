@@ -3,6 +3,8 @@ import { useEffect, useMemo, useState } from 'react'
 const PUBLIC_PREVIEW = true
 const REQUIRED_ASSET = 'CrystalBob access asset'
 const NBA_DASHBOARD_URL = 'https://nba.bobbrowser.com'
+const BRAND_LOCKUP = '/final-brand-assets/black-bg-alt/crystalbob-lockup.png'
+const BRAND_ORB = '/final-brand-assets/transparent/crystalbob-orb.png'
 
 const sports = [
   {
@@ -11,7 +13,7 @@ const sports = [
     status: 'live',
     shortStatus: 'Live now',
     description: 'Full public preview of the live NBA dashboard for the next few days.',
-    asset: '/exports/finals/crystalbob-basketball-final.png',
+    asset: '/exports/finals/crystalbob-basketball-final.jpg',
     summary: 'Exact live dashboard from nba.bobbrowser.com inside the CrystalBob shell.',
     route: '/nba',
   },
@@ -61,7 +63,7 @@ const sports = [
     status: 'coming-soon',
     shortStatus: 'Staged',
     description: 'Fight card lane reserved for eventual event-day drops.',
-    asset: '/exports/finals/crystalbob-mma-final.jpg',
+    asset: '/exports/finals/crystalbob-mma-final.png',
     summary: 'Brand-ready, product later.',
     route: '/mma',
   },
@@ -74,26 +76,6 @@ const sports = [
     asset: '/exports/finals/crystalbob-soccer-final.png',
     summary: 'Staged, not live yet.',
     route: '/soccer',
-  },
-  {
-    key: 'esports',
-    name: 'Esports',
-    status: 'coming-soon',
-    shortStatus: 'Staged',
-    description: 'Esports lane reserved once the product is real, not fake-launched.',
-    asset: '/exports/finals/crystalbob-esports-final.png',
-    summary: 'Held until the lane is real.',
-    route: '/esports',
-  },
-  {
-    key: 'boxing',
-    name: 'Boxing',
-    status: 'coming-soon',
-    shortStatus: 'Staged',
-    description: 'Fight-night lane reserved inside the same CrystalBob shell.',
-    asset: '/exports/finals/crystalbob-boxing-final.png',
-    summary: 'Staged, not live yet.',
-    route: '/boxing',
   },
   {
     key: 'cricket',
@@ -155,7 +137,7 @@ function usePathRoute() {
 function LogoLockup({ compact = false }) {
   return (
     <div className={`logo-lockup ${compact ? 'compact' : ''}`}>
-      <img src="/brand-kit.png" alt="CrystalBob logo" />
+      <img src={BRAND_LOCKUP} alt="CrystalBob logo" />
     </div>
   )
 }
@@ -164,7 +146,7 @@ function Header({ navigate }) {
   return (
     <header className="site-header">
       <button className="brand-button" onClick={() => navigate('/')}>
-        <img src="/exports/crystalbob-base-shell.svg" alt="CrystalBob icon" className="brand-icon" />
+        <img src={BRAND_ORB} alt="CrystalBob icon" className="brand-icon" />
         <span>CrystalBob</span>
       </button>
 
@@ -182,10 +164,10 @@ function PreviewBanner() {
     <div className="preview-banner" id="access">
       <div>
         <span className="pill pill-live">Public preview live</span>
-        <strong>NBA is open to everyone for a few days.</strong>
+        <strong>NBA is the first live CrystalBob lane.</strong>
       </div>
       <p>
-        Wallet gating is staged next. After preview ends, users will need to connect a wallet and hold the right asset to unlock protected dashboards.
+        Wallet gating is still staged. For now, the focus is getting the shared shell and the live sport dashboards cleaned up and moved over one by one.
       </p>
     </div>
   )
@@ -238,23 +220,30 @@ function SportCard({ sport, navigate }) {
 }
 
 function HomePage({ navigate }) {
+  const liveSports = sports.filter((sport) => sport.status === 'live')
+  const stagedSports = sports.filter((sport) => sport.status !== 'live')
+
   return (
     <main className="page page-home compact-homepage">
       <section className="compact-home-shell">
         <div className="compact-home-left">
           <span className="eyebrow">Live model dashboards</span>
           <LogoLockup compact />
-          <h1>Live sports dashboards for holders.</h1>
+          <h1>Serious sports model dashboards, all under one roof.</h1>
           <p>
-            NBA is live now inside CrystalBob. The rest of the lanes are staged honestly and will go live one by one as the real products are ready.
+            CrystalBob is the live shell for Gravy&apos;s sports model suite. NBA is live now. The rest of the lanes stay staged until each dashboard is ready for a real product pass.
           </p>
           <div className="hero-actions compact-actions">
             <button className="primary-button" onClick={() => navigate('/nba')}>Open NBA</button>
-            <button className="secondary-button">Connect wallet soon</button>
+            <a className="secondary-button" href="#staged-lanes">View staged lanes</a>
           </div>
           <div className="compact-preview-note">
             <span className="pill pill-live">Public preview</span>
-            <span>NBA is open for everyone for a few days.</span>
+            <span>{liveSports.length} live lane · {stagedSports.length} staged lanes</span>
+          </div>
+          <div className="lane-summary" id="staged-lanes">
+            <strong>Currently staged:</strong>
+            <span>{stagedSports.map((sport) => sport.name).join(' · ')}</span>
           </div>
         </div>
 
@@ -298,15 +287,15 @@ function NbaPage() {
       <section className="sport-hero live-sport">
         <div>
           <span className="eyebrow">NBA lane</span>
-          <h1>NBA public preview</h1>
+          <h1>NBA live now</h1>
           <p>
-            This is the live NBA dashboard inside the CrystalBob shell. It stays public for a few days, then becomes gated with the wallet check flow.
+            This is the first live CrystalBob dashboard. It is running publicly right now while the new shared shell and the rest of the sport lanes get migrated behind it.
           </p>
           <div className="hero-actions">
             <a className="primary-button" href={NBA_DASHBOARD_URL} target="_blank" rel="noreferrer">Open in new tab</a>
           </div>
         </div>
-        <img src="/exports/finals/crystalbob-basketball-final.png" alt="NBA badge" className="sport-hero-badge" />
+        <img src="/exports/finals/crystalbob-basketball-final.jpg" alt="NBA badge" className="sport-hero-badge" />
       </section>
 
       <PreviewBanner />
