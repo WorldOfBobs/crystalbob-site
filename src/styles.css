@@ -100,7 +100,7 @@ img {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
@@ -109,29 +109,27 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 999px;
-  padding: 10px 14px;
-  border: 1px solid rgba(255, 225, 91, 0.16);
   cursor: pointer;
   transition: 0.18s ease;
 }
 
 .social-placeholder {
-  background: rgba(255,255,255,0.03);
-  color: #FFD600;
-  width: 42px;
-  height: 42px;
+  background: transparent;
+  border: 0;
   padding: 0;
 }
 
 .social-icon-image {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   object-fit: contain;
   object-position: center;
 }
 
 .wallet-button {
+  border-radius: 999px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 225, 91, 0.16);
   background: linear-gradient(180deg, var(--gold-soft), var(--gold));
   color: #050505;
   font-weight: 800;
@@ -711,11 +709,11 @@ img {
   .site-footer,
   .frame-topbar {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .header-actions {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .hero-section,
