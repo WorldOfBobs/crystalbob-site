@@ -158,25 +158,6 @@ function LogoLockup({ compact = false }) {
   )
 }
 
-function SocialIcon({ kind }) {
-  if (kind === 'discord') {
-    return (
-      <svg viewBox="0 0 24 24" className="social-icon" aria-hidden="true">
-        <path d="M8 8.5C9.6 7.6 11 7.3 12 7.3C13 7.3 14.4 7.6 16 8.5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-        <path d="M7 9.5C6.3 10.7 5.9 12.2 5.8 13.8C7 14.7 8.1 15.2 9.3 15.6C9.7 15 10 14.4 10.2 13.8M17 9.5C17.7 10.7 18.1 12.2 18.2 13.8C17 14.7 15.9 15.2 14.7 15.6C14.3 15 14 14.4 13.8 13.8" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="9.7" cy="12.2" r="0.9" fill="currentColor" />
-        <circle cx="14.3" cy="12.2" r="0.9" fill="currentColor" />
-      </svg>
-    )
-  }
-
-  return (
-    <svg viewBox="0 0 24 24" className="social-icon" aria-hidden="true">
-      <path d="M5 18L10.3 12.3L6.1 6H9.6L12.2 10L15.9 6H19L13.6 11.8L18 18H14.5L11.7 14L8 18H5Z" fill="currentColor" />
-    </svg>
-  )
-}
-
 function Header({ navigate }) {
   return (
     <header className="site-header">
@@ -187,10 +168,10 @@ function Header({ navigate }) {
 
       <div className="header-actions">
         <button className="social-placeholder" type="button" aria-label="Discord">
-          <SocialIcon kind="discord" />
+          <img src="/final-brand-assets/social/crystalbob-discord-icon.png" alt="Discord" className="social-icon-image" />
         </button>
         <button className="social-placeholder" type="button" aria-label="X">
-          <SocialIcon kind="x" />
+          <img src="/final-brand-assets/social/crystalbob-x-icon.png" alt="X" className="social-icon-image" />
         </button>
         <button className="wallet-button" type="button">Connect wallet</button>
       </div>
@@ -270,15 +251,6 @@ function HomePage({ navigate }) {
       </section>
 
       <section className="sports-icon-section" id="staged-lanes">
-        <div className="sports-icon-header">
-          {groupedSports.map((group) => (
-            <div key={group.key} className="status-summary-item">
-              <strong>{group.sports.length}</strong>
-              <span>{group.label}</span>
-            </div>
-          ))}
-        </div>
-
         <div className="sports-groups-wrap">
           {groupedSports.map((group) => (
             <section key={group.key} className="sports-group-block">

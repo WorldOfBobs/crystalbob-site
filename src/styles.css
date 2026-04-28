@@ -124,9 +124,11 @@ img {
   padding: 0;
 }
 
-.social-icon {
-  width: 18px;
-  height: 18px;
+.social-icon-image {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  object-position: center;
 }
 
 .wallet-button {
@@ -259,34 +261,6 @@ img {
   display: grid;
   gap: 24px;
   padding-top: 6px;
-}
-
-.sports-icon-header {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.status-summary-item {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
-}
-
-.status-summary-item strong,
-.status-summary-item span {
-  margin: 0;
-}
-
-.status-summary-item strong {
-  color: var(--gold);
-  font-size: 1rem;
-}
-
-.status-summary-item span {
-  color: var(--muted);
-  font-size: 0.96rem;
 }
 
 .sports-groups-wrap {
