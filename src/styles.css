@@ -476,6 +476,8 @@ img {
 .sport-art {
   width: 100%;
   aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
   border-radius: 18px;
   background: #050505;
   border: 1px solid rgba(255,255,255,0.05);
