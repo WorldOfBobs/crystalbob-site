@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import CanonicalNbaApp from './nba-canonical/App'
 
-const BRAND_LOCKUP = '/final-brand-assets/transparent/crystalbob-lockup.png'
+const BRAND_LOCKUP = '/final-brand-assets/transparent/crystalbob-lockup-home.png'
 const BRAND_ORB = '/final-brand-assets/transparent/crystalbob-orb-header.png'
 
 const sports = [
