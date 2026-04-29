@@ -66,8 +66,7 @@ img {
   align-items: center;
   gap: 20px;
   padding: 12px 0 18px;
-  backdrop-filter: blur(10px);
-  background: linear-gradient(180deg, rgba(5,5,5,0.94), rgba(5,5,5,0.54));
+  background: transparent;
 }
 
 .brand-button {
@@ -86,6 +85,7 @@ img {
   height: 38px;
   object-fit: contain;
   object-position: center;
+  filter: none;
 }
 
 .brand-wordmark {
