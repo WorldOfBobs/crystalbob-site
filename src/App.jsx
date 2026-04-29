@@ -1,20 +1,38 @@
 import { useEffect, useMemo, useState } from 'react'
 
-const PUBLIC_PREVIEW = true
-const REQUIRED_ASSET = 'CrystalBob access asset'
-const NBA_DASHBOARD_URL = 'https://nba.bobbrowser.com'
 const BRAND_LOCKUP = '/final-brand-assets/black-bg/crystalbob-lockup.png'
 const BRAND_ORB = '/final-brand-assets/black-bg/crystalbob-orb.png'
+
+const NBA_MARKETS = [
+  'Full-game spreads, moneylines, and totals',
+  'First-half and second-half spreads, moneylines, and totals',
+  'Quarter spreads, moneylines, and totals',
+  'Alternate market views',
+  'Historical result views and supporting board context',
+]
+
+const NBA_MODELS = [
+  'Four-Factor team model',
+  'Player Deep context model',
+  'Possession simulation model',
+  'Ensemble decision layer',
+]
+
+const NBA_SAMPLE_ROWS = [
+  { matchup: 'AWAY @ HOME', market: 'Spread', model: 'Possession', display: 'Sample edge card', status: 'Locked' },
+  { matchup: 'AWAY @ HOME', market: 'Moneyline', model: 'Player Deep', display: 'Sample support stack', status: 'Locked' },
+  { matchup: 'AWAY @ HOME', market: 'Total', model: 'Ensemble', display: 'Sample market view', status: 'Locked' },
+]
 
 const sports = [
   {
     key: 'nba',
     name: 'NBA',
     status: 'live',
-    shortStatus: 'Live Now',
+    shortStatus: 'NBA Dashboard',
     category: 'Live Now',
-    description: 'Full public preview of the live NBA dashboard for the next few days.',
-    summary: 'Live quant board with the real dashboard already running.',
+    description: 'Model-driven NBA board covering spreads, moneylines, totals, and quarter/half markets.',
+    summary: 'Multi-model NBA market surface with locked sample presentation.',
     asset: '/exports/finals/crystalbob-basketball-final.png',
     route: '/nba',
   },
@@ -190,38 +208,6 @@ function Header({ navigate }) {
   )
 }
 
-function PreviewBanner() {
-  return (
-    <div className="preview-banner" id="access">
-      <div>
-        <span className="pill pill-live">Public preview live</span>
-        <strong>NBA is the first live CrystalBob lane.</strong>
-      </div>
-      <p>
-        Wallet gating is still staged. For now, the focus is getting the shared shell and the live sport dashboards cleaned up and moved over one by one.
-      </p>
-    </div>
-  )
-}
-
-function WalletCard() {
-  return (
-    <aside className="wallet-card">
-      <span className="pill pill-muted">Access layer</span>
-      <h3>Connect wallet</h3>
-      <p>
-        For now this is public preview mode. Next phase adds wallet verification and checks for <strong>{REQUIRED_ASSET}</strong> before showing protected results.
-      </p>
-      <button className="primary-button">Connect wallet soon</button>
-      <ul>
-        <li>Public preview now</li>
-        <li>Wallet verify next</li>
-        <li>Asset gate after preview</li>
-      </ul>
-    </aside>
-  )
-}
-
 function SportArtwork({ sport }) {
   if (sport.asset) {
     return <img src={sport.asset} alt={`${sport.name} badge`} className="sport-art" />
@@ -258,7 +244,7 @@ function HomePage({ navigate }) {
     <main className="page page-home compact-homepage">
       <section className="home-hero-simple">
         <LogoLockup />
-        <p className="hero-tagline">Statistical models built for users looking for that edge.</p>
+        <p className="hero-tagline">Model-driven sports market interfaces.</p>
       </section>
 
       <section className="sports-icon-section" id="staged-lanes">
@@ -281,50 +267,88 @@ function HomePage({ navigate }) {
   )
 }
 
-function GatePreviewOverlay({ enabled }) {
-  if (PUBLIC_PREVIEW || !enabled) return null
-
-  return (
-    <div className="gate-overlay">
-      <div className="gate-overlay-card">
-        <span className="pill pill-live">Connect wallet</span>
-        <h3>Protected page</h3>
-        <p>Connect a wallet to continue. If the wallet does not hold {REQUIRED_ASSET}, this page stays locked.</p>
-      </div>
-    </div>
-  )
-}
-
 function NbaPage() {
   return (
     <main className="page sport-page">
       <section className="sport-hero live-sport">
         <div>
-          <span className="eyebrow">NBA lane</span>
-          <h1>NBA live now</h1>
+          <span className="eyebrow">CrystalBob NBA</span>
+          <h1>NBA market intelligence</h1>
           <p>
-            This is the first live CrystalBob dashboard. It is running publicly right now while the new shared shell and the rest of the sport lanes get migrated behind it.
+            CrystalBob NBA covers full-game, half, quarter, and alternate market structure across spreads, moneylines, and totals.
+            The page below is a locked product sample that shows the board format without exposing live recommendations.
           </p>
-          <div className="hero-actions">
-            <a className="primary-button" href={NBA_DASHBOARD_URL} target="_blank" rel="noreferrer">Open in new tab</a>
-          </div>
         </div>
         <img src="/exports/finals/crystalbob-basketball-final.png" alt="NBA badge" className="sport-hero-badge" />
       </section>
 
-      <PreviewBanner />
+      <section className="structure-grid">
+        <article className="structure-card">
+          <span className="pill pill-muted">Markets</span>
+          <h3>Lines covered</h3>
+          <ul>
+            {NBA_MARKETS.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </article>
 
-      <section className="dashboard-frame-shell">
-        <div className="frame-topbar">
-          <div>
-            <strong>Live dashboard</strong>
-            <p>{NBA_DASHBOARD_URL}</p>
-          </div>
-          <span className="pill pill-live">Preview unlocked</span>
+        <article className="structure-card">
+          <span className="pill pill-muted">Models</span>
+          <h3>Models used</h3>
+          <ul>
+            {NBA_MODELS.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </article>
+      </section>
+
+      <section className="dashboard-frame-shell sample-shell">
+        <div className="sample-intro">
+          <strong>Dashboard Preview</strong>
+          <p>Sample structure only. Table and chart elements stay visible; live picks stay gated.</p>
         </div>
-        <div className="iframe-wrap">
-          <iframe src={NBA_DASHBOARD_URL} title="CrystalBob NBA dashboard" />
-          <GatePreviewOverlay enabled />
+        <div className="sample-board">
+          <div className="sample-board-head">
+            <span>Matchup</span>
+            <span>Market</span>
+            <span>Model</span>
+            <span>Surface</span>
+            <span>Status</span>
+          </div>
+          <div className="sample-board-body" aria-label="Locked CrystalBob NBA sample board">
+            {NBA_SAMPLE_ROWS.map((row, idx) => (
+              <div className="sample-board-row" key={`${row.market}-${idx}`}>
+                <span>{row.matchup}</span>
+                <span>{row.market}</span>
+                <span>{row.model}</span>
+                <span>{row.display}</span>
+                <span className="sample-lock">{row.status}</span>
+              </div>
+            ))}
+          </div>
+          <div className="sample-chart-row">
+            <div className="sample-chart-card">
+              <strong>Edge distribution</strong>
+              <div className="sample-bars" aria-hidden="true">
+                <span style={{ height: '42%' }} />
+                <span style={{ height: '65%' }} />
+                <span style={{ height: '58%' }} />
+                <span style={{ height: '76%' }} />
+                <span style={{ height: '49%' }} />
+              </div>
+            </div>
+            <div className="sample-chart-card">
+              <strong>Model support mix</strong>
+              <div className="sample-pills" aria-hidden="true">
+                <span>4F</span>
+                <span>PD</span>
+                <span>Poss</span>
+                <span>Ens</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -336,13 +360,13 @@ function ComingSoonPage({ sport, navigate }) {
     <main className="page sport-page">
       <section className="sport-hero">
         <div>
-          <span className="eyebrow">{sport.name} lane</span>
+          <span className="eyebrow">{sport.name}</span>
           <h1>{sport.name} is staged</h1>
           <p>
-            The route and brand shell are ready, but this lane is not live yet. It stays visible so the full CrystalBob product map is clear without pretending the underlying dashboard exists today.
+            The route and brand shell are ready, but this sport is not live yet. It stays visible so the full CrystalBob product map is clear without pretending the underlying dashboard exists today.
           </p>
           <div className="hero-actions">
-            <button className="primary-button" onClick={() => navigate('/nba')}>View live NBA preview</button>
+            <button className="primary-button" onClick={() => navigate('/nba')}>View NBA overview</button>
             <button className="secondary-button" onClick={() => navigate('/')}>Back home</button>
           </div>
         </div>
@@ -351,15 +375,15 @@ function ComingSoonPage({ sport, navigate }) {
 
       <section className="coming-soon-panel">
         <div className="coming-soon-copy">
-          <span className="pill pill-muted">Staged lane</span>
-          <h2>{sport.name} will plug into the same wallet-gated shell</h2>
+          <span className="pill pill-muted">Staged</span>
+          <h2>{sport.name} will plug into the same CrystalBob shell</h2>
           <p>{sport.description}</p>
         </div>
 
         <div className="coming-soon-checks">
-          <div className="check-card">Public preview mode keeps this page visible for now.</div>
-          <div className="check-card">Later state: results faded with a wallet-connect overlay.</div>
-          <div className="check-card">If wallet lacks {REQUIRED_ASSET}, the lane stays locked.</div>
+          <div className="check-card">Shared shell, sport-specific logic.</div>
+          <div className="check-card">Same product language, different market engine.</div>
+          <div className="check-card">This route stays visible so the expansion map is clear.</div>
         </div>
       </section>
     </main>
@@ -388,9 +412,19 @@ function Footer() {
     <footer className="site-footer">
       <div>
         <strong>CrystalBob</strong>
-        <p>NBA live now. Additional lanes staged honestly.</p>
+        <p>Model-driven sports market interfaces.</p>
       </div>
-      <span>crystalbob.com</span>
+      <div className="footer-meta">
+        <button className="social-placeholder footer-social" type="button" aria-label="Discord">
+          <img src="/final-brand-assets/social/crystalbob-discord-icon-final.png" alt="Discord" className="social-icon-image" />
+        </button>
+        <button className="social-placeholder footer-social" type="button" aria-label="X">
+          <img src="/final-brand-assets/social/crystalbob-x-icon-final.png" alt="X" className="social-icon-image" />
+        </button>
+        <span>About</span>
+        <span>Contact</span>
+        <span>© 2026 CrystalBob. All rights reserved.</span>
+      </div>
     </footer>
   )
 }
