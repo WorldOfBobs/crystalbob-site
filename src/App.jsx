@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 
 const BRAND_LOCKUP = '/final-brand-assets/black-bg/crystalbob-lockup.png'
 const BRAND_ORB = '/final-brand-assets/black-bg/crystalbob-orb.png'
+const NBA_DASHBOARD_URL = 'https://nba.bobbrowser.com'
 
 const NBA_MARKETS = [
   'Full-game spreads, moneylines, and totals',
@@ -304,51 +305,18 @@ function NbaPage() {
         </article>
       </section>
 
-      <section className="dashboard-frame-shell sample-shell">
-        <div className="sample-intro">
-          <strong>Dashboard Preview</strong>
-          <p>Sample structure only. Table and chart elements stay visible; live picks stay gated.</p>
+      <section className="dashboard-frame-shell">
+        <div className="frame-topbar">
+          <div>
+            <strong>NBA Dashboard</strong>
+            <p>Live CrystalBob NBA board embedded directly into the CrystalBob site.</p>
+          </div>
+          <a className="primary-button dashboard-open-link" href={NBA_DASHBOARD_URL} target="_blank" rel="noreferrer">
+            Open NBA Dashboard
+          </a>
         </div>
-        <div className="sample-board">
-          <div className="sample-board-head">
-            <span>Matchup</span>
-            <span>Market</span>
-            <span>Model</span>
-            <span>Surface</span>
-            <span>Status</span>
-          </div>
-          <div className="sample-board-body" aria-label="Locked CrystalBob NBA sample board">
-            {NBA_SAMPLE_ROWS.map((row, idx) => (
-              <div className="sample-board-row" key={`${row.market}-${idx}`}>
-                <span>{row.matchup}</span>
-                <span>{row.market}</span>
-                <span>{row.model}</span>
-                <span>{row.display}</span>
-                <span className="sample-lock">{row.status}</span>
-              </div>
-            ))}
-          </div>
-          <div className="sample-chart-row">
-            <div className="sample-chart-card">
-              <strong>Edge distribution</strong>
-              <div className="sample-bars" aria-hidden="true">
-                <span style={{ height: '42%' }} />
-                <span style={{ height: '65%' }} />
-                <span style={{ height: '58%' }} />
-                <span style={{ height: '76%' }} />
-                <span style={{ height: '49%' }} />
-              </div>
-            </div>
-            <div className="sample-chart-card">
-              <strong>Model support mix</strong>
-              <div className="sample-pills" aria-hidden="true">
-                <span>4F</span>
-                <span>PD</span>
-                <span>Poss</span>
-                <span>Ens</span>
-              </div>
-            </div>
-          </div>
+        <div className="iframe-wrap">
+          <iframe src={NBA_DASHBOARD_URL} title="CrystalBob NBA Dashboard" loading="lazy" />
         </div>
       </section>
     </main>
