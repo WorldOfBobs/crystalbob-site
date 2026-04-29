@@ -203,6 +203,19 @@ function App() {
   const possessionPreds = data?.possession_predictions ?? []
   const fourfactorPreds = data?.fourfactor_predictions ?? []
   const ensemblePreds = data?.ensemble_predictions ?? []
+  const latestVisibleRun = ['possession', 'playerdeep', 'fourfactor']
+    .map((lane) => laneStates?.[lane]?.last_run)
+    .filter(Boolean)
+    .sort()
+    .at(-1)
+  const updatedLabel = latestVisibleRun
+    ? `Model run ${new Date(latestVisibleRun).toLocaleTimeString('en-US', {
+        timeZone: 'America/New_York',
+        hour: 'numeric',
+        minute: '2-digit',
+        timeZoneName: 'short',
+      })}`
+    : 'Model update time unavailable'
   const activeView = MARKET_VIEWS[marketType]
   const marketViewProps = {
     laneStates,
@@ -288,11 +301,12 @@ function App() {
         <div className="banner-top">
           <div className="banner-brand">
             <div className="banner-copy banner-copy--wide">
-              <div className="banner-title-stack">
-                <span className="banner-title-text">CrystalBob</span>
+              <div className="banner-title-stack banner-title-stack--brand">
+                <img src="/final-brand-assets/transparent/crystalbob-orb-header.png" alt="" className="banner-brand-icon" />
+                <span className="banner-brand-wordmark"><span className="banner-brand-wordmark-light">Crystal</span><span className="banner-brand-wordmark-bold">Bob</span></span>
               </div>
               <div className="banner-meta">
-                <span>Updated {today}</span>
+                <span>{updatedLabel}</span>
               </div>
             </div>
           </div>

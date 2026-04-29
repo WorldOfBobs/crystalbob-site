@@ -247,19 +247,41 @@ body {
   gap: 5px;
 }
 
+.banner-title-stack--brand {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
 .banner-title-image {
   height: 30px;
   width: auto;
   display: block;
 }
 
-.banner-title-text {
-  display: inline-block;
-  color: #f3efdc;
-  font-size: clamp(1.5rem, 2.3vw, 2.1rem);
+.banner-brand-icon {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  object-position: center;
+  flex: 0 0 auto;
+}
+
+.banner-brand-wordmark {
+  color: #F5FF3B;
+  letter-spacing: -0.03em;
+  display: inline-flex;
+  align-items: baseline;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.banner-brand-wordmark-light {
+  font-weight: 500;
+}
+
+.banner-brand-wordmark-bold {
   font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 0.95;
 }
 
 .banner-sport-line {
