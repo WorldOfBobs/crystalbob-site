@@ -315,8 +315,7 @@ function App() {
     .sort()
     .at(-1)
   const updatedLabel = latestVisibleRun
-    ? `Model run ${new Date(latestVisibleRun).toLocaleTimeString('en-US', {
-        timeZone: 'America/New_York',
+    ? `Model last run at ${new Date(latestVisibleRun).toLocaleTimeString('en-US', {
         hour: 'numeric',
         minute: '2-digit',
         timeZoneName: 'short',
