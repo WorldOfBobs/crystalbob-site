@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
-import NbaDashboard from './nba/NbaDashboard'
+import CanonicalNbaApp from './nba-canonical/App'
 
-const BRAND_LOCKUP = '/final-brand-assets/black-bg/crystalbob-lockup.png'
+const BRAND_LOCKUP = '/final-brand-assets/transparent/crystalbob-lockup.png'
 const BRAND_ORB = '/final-brand-assets/black-bg/crystalbob-orb.png'
 
 const sports = [
@@ -248,7 +248,7 @@ function HomePage({ navigate }) {
 }
 
 function NbaPage() {
-  return <NbaDashboard />
+  return <CanonicalNbaApp />
 }
 
 function ComingSoonPage({ sport, navigate }) {
@@ -330,7 +330,7 @@ export default function App() {
 
   const activeSport = useMemo(() => sports.find((sport) => sport.route === route), [route])
   const isHome = route === '/'
-  const isNba = route === '/nba'
+  const isNba = route === '/nba' || route.startsWith('/admin')
 
   if (isNba) {
     return <NbaPage />
