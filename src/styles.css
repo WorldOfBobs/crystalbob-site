@@ -655,6 +655,22 @@ img {
   background: #0a0a0a;
 }
 
+.native-dashboard-shell {
+  padding-bottom: 20px;
+}
+
+.native-dashboard-wrap {
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: #050505;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+.native-dashboard-wrap .nba-native {
+  min-height: 920px;
+}
+
 .gate-overlay {
   position: absolute;
   inset: 0;

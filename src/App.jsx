@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import NbaDashboard from './nba/NbaDashboard'
 
 const BRAND_LOCKUP = '/final-brand-assets/black-bg/crystalbob-lockup.png'
 const BRAND_ORB = '/final-brand-assets/black-bg/crystalbob-orb.png'
@@ -17,12 +18,6 @@ const NBA_MODELS = [
   'Player Deep context model',
   'Possession simulation model',
   'Ensemble decision layer',
-]
-
-const NBA_SAMPLE_ROWS = [
-  { matchup: 'AWAY @ HOME', market: 'Spread', model: 'Possession', display: 'Sample edge card', status: 'Locked' },
-  { matchup: 'AWAY @ HOME', market: 'Moneyline', model: 'Player Deep', display: 'Sample support stack', status: 'Locked' },
-  { matchup: 'AWAY @ HOME', market: 'Total', model: 'Ensemble', display: 'Sample market view', status: 'Locked' },
 ]
 
 const sports = [
@@ -277,7 +272,7 @@ function NbaPage() {
           <h1>NBA market intelligence</h1>
           <p>
             CrystalBob NBA covers full-game, half, quarter, and alternate market structure across spreads, moneylines, and totals.
-            The page below is a locked product sample that shows the board format without exposing live recommendations.
+            The live dashboard below now renders natively inside the CrystalBob shell.
           </p>
         </div>
         <img src="/exports/finals/crystalbob-basketball-final.png" alt="NBA badge" className="sport-hero-badge" />
@@ -305,18 +300,18 @@ function NbaPage() {
         </article>
       </section>
 
-      <section className="dashboard-frame-shell">
+      <section className="dashboard-frame-shell native-dashboard-shell">
         <div className="frame-topbar">
           <div>
             <strong>NBA Dashboard</strong>
-            <p>Live CrystalBob NBA board embedded directly into the CrystalBob site.</p>
+            <p>Live CrystalBob NBA board now renders natively inside the CrystalBob site shell.</p>
           </div>
           <a className="primary-button dashboard-open-link" href={NBA_DASHBOARD_URL} target="_blank" rel="noreferrer">
             Open NBA Dashboard
           </a>
         </div>
-        <div className="iframe-wrap">
-          <iframe src={NBA_DASHBOARD_URL} title="CrystalBob NBA Dashboard" loading="lazy" />
+        <div className="native-dashboard-wrap">
+          <NbaDashboard />
         </div>
       </section>
     </main>
