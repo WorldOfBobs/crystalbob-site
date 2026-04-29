@@ -2,8 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import CanonicalNbaApp from './nba-canonical/App'
 
 const BRAND_LOCKUP = '/final-brand-assets/transparent/crystalbob-lockup.png'
-const BRAND_ORB = '/final-brand-assets/black-bg/crystalbob-orb.png'
-const BRAND_HEADER_LOCKUP = '/final-brand-assets/transparent/crystalbob-lockup.png'
+const BRAND_ORB = '/final-brand-assets/transparent/crystalbob-orb.png'
 
 const sports = [
   {
@@ -171,8 +170,9 @@ function LogoLockup({ compact = false }) {
 function Header({ navigate }) {
   return (
     <header className="site-header">
-      <button className="brand-button brand-button-lockup" onClick={() => navigate('/')}>
-        <img src={BRAND_HEADER_LOCKUP} alt="CrystalBob" className="brand-lockup-inline" />
+      <button className="brand-button" onClick={() => navigate('/')}>
+        <img src={BRAND_ORB} alt="CrystalBob icon" className="brand-icon" />
+        <span className="brand-wordmark"><span className="brand-wordmark-light">Crystal</span><span className="brand-wordmark-bold">Bob</span></span>
       </button>
 
       <div className="header-actions">
