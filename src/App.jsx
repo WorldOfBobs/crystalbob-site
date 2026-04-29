@@ -247,7 +247,7 @@ function HomePage({ navigate }) {
     <main className="page page-home compact-homepage">
       <section className="home-hero-simple">
         <LogoLockup />
-        <p className="hero-tagline">Statistical models built for users looking for an edge.</p>
+        <p className="hero-tagline">Statistical models built for users looking for that edge.</p>
       </section>
 
       <section className="sports-icon-section" id="staged-lanes">
