@@ -172,7 +172,7 @@ function Header({ navigate }) {
     <header className="site-header">
       <button className="brand-button" onClick={() => navigate('/')}>
         <img src={BRAND_ORB} alt="CrystalBob icon" className="brand-icon" />
-        <span className="brand-wordmark">CrystalBob</span>
+        <span className="brand-wordmark"><span className="brand-wordmark-light">Crystal</span><span className="brand-wordmark-bold">Bob</span></span>
       </button>
 
       <div className="header-actions">

@@ -93,8 +93,17 @@ img {
 
 .brand-wordmark {
   color: #F5FF3B;
-  font-weight: 800;
   letter-spacing: -0.03em;
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.brand-wordmark-light {
+  font-weight: 500;
+}
+
+.brand-wordmark-bold {
+  font-weight: 800;
 }
 
 .header-actions {
