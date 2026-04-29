@@ -225,7 +225,7 @@ body {
 }
 
 .banner-orb--right {
-  width: 50px;
+  width: 42px;
   filter: drop-shadow(0 4px 14px rgba(245, 255, 59, 0.14));
 }
 
@@ -272,7 +272,7 @@ body {
   letter-spacing: -0.03em;
   display: inline-flex;
   align-items: baseline;
-  font-size: 1rem;
+  font-size: 1.28rem;
   line-height: 1;
 }
 
@@ -325,9 +325,9 @@ body {
   padding: 4px 0;
   color: var(--yellow);
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(2rem, 2.8vw, 2.55rem);
+  font-size: clamp(1.65rem, 2.3vw, 2.05rem);
   font-weight: 700;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.055em;
   line-height: 0.9;
   text-transform: uppercase;
   white-space: nowrap;

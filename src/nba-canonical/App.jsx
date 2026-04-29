@@ -14,6 +14,82 @@ import { anyVisibleLaneHasData, anyVisibleLaneLoading, getLaneStates, getSchedul
 import './App.css'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
+const ESPN_SCOREBOARD_URL = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard'
+
+function etDateStr(offset = 0) {
+  const base = new Date()
+  base.setDate(base.getDate() + offset)
+  return base.toLocaleDateString('en-CA', { timeZone: 'America/New_York' })
+}
+
+function espnDateStr(offset = 0) {
+  return etDateStr(offset).replaceAll('-', '')
+}
+
+function normalizeTeamToken(value) {
+  const raw = String(value || '')
+    .trim()
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, ' ')
+    .trim()
+  const aliases = {
+    BK: 'BKN',
+    GS: 'GSW',
+    NO: 'NOP',
+    NY: 'NYK',
+    PHO: 'PHX',
+    SA: 'SAS',
+    UTAH: 'UTA',
+    WSH: 'WAS',
+  }
+  return aliases[raw] || raw
+}
+
+function predictionScheduleKey(row) {
+  const matchup = row?.matchup || ''
+  const [away, home] = matchup.split('@').map((part) => normalizeTeamToken(part))
+  if (!row?.game_date || !away || !home) return null
+  return `${row.game_date}|${away}|${home}`
+}
+
+function eventScheduleKey(event, date) {
+  const competitors = event?.competitions?.[0]?.competitors || []
+  const away = competitors.find((team) => team?.homeAway === 'away')
+  const home = competitors.find((team) => team?.homeAway === 'home')
+  const awayName = normalizeTeamToken(away?.team?.abbreviation || away?.team?.shortDisplayName || away?.team?.displayName)
+  const homeName = normalizeTeamToken(home?.team?.abbreviation || home?.team?.shortDisplayName || home?.team?.displayName)
+  if (!date || !awayName || !homeName) return null
+  return `${date}|${awayName}|${homeName}`
+}
+
+async function fetchScheduledKeysForWindow() {
+  const [todayRes, tomorrowRes] = await Promise.all([
+    fetch(`${ESPN_SCOREBOARD_URL}?dates=${espnDateStr(0)}`),
+    fetch(`${ESPN_SCOREBOARD_URL}?dates=${espnDateStr(1)}`),
+  ])
+  const payloads = await Promise.all([
+    todayRes.ok ? todayRes.json() : { events: [] },
+    tomorrowRes.ok ? tomorrowRes.json() : { events: [] },
+  ])
+  const dates = [etDateStr(0), etDateStr(1)]
+  const keys = new Set()
+  payloads.forEach((payload, index) => {
+    for (const event of payload?.events || []) {
+      const key = eventScheduleKey(event, dates[index])
+      if (key) keys.add(key)
+    }
+  })
+  return keys
+}
+
+function filterPredictionsToScheduledWindow(rows, scheduledKeys) {
+  if (!Array.isArray(rows)) return []
+  if (!(scheduledKeys instanceof Set) || scheduledKeys.size === 0) return rows
+  return rows.filter((row) => {
+    const key = predictionScheduleKey(row)
+    return key ? scheduledKeys.has(key) : false
+  })
+}
 
 const PRIMARY_TABS = [
   { key: 'spread', label: 'Spread' },
@@ -127,10 +203,40 @@ function App() {
         setLoading(true)
       }
       setError(null)
-      const res = await fetch(`${API_URL}/api/predictions/today`)
-      if (!res.ok) throw new Error(`API error: ${res.status}`)
-      const json = await res.json()
-      setData(json)
+      const [surfaceRes, playerdeepRes, possessionRes, fourfactorRes, scheduledKeys] = await Promise.all([
+        fetch(`${API_URL}/api/predictions/today`),
+        fetch(`${API_URL}/api/predictions/playerdeep`).catch(() => null),
+        fetch(`${API_URL}/api/predictions/possession`).catch(() => null),
+        fetch(`${API_URL}/api/predictions/fourfactor`).catch(() => null),
+        fetchScheduledKeysForWindow().catch(() => new Set()),
+      ])
+      if (!surfaceRes.ok) throw new Error(`API error: ${surfaceRes.status}`)
+      const [surfaceJson, playerdeepJson, possessionJson, fourfactorJson] = await Promise.all([
+        surfaceRes.json(),
+        playerdeepRes?.ok ? playerdeepRes.json() : { predictions: [] },
+        possessionRes?.ok ? possessionRes.json() : { predictions: [] },
+        fourfactorRes?.ok ? fourfactorRes.json() : { predictions: [] },
+      ])
+
+      const playerdeepPredictions = filterPredictionsToScheduledWindow(playerdeepJson?.predictions, scheduledKeys)
+      const possessionPredictions = filterPredictionsToScheduledWindow(possessionJson?.predictions, scheduledKeys)
+      const fourfactorPredictions = filterPredictionsToScheduledWindow(fourfactorJson?.predictions, scheduledKeys)
+      const todayScheduleKeys = new Set([...scheduledKeys].filter((key) => key.startsWith(`${etDateStr(0)}|`)))
+      const rawEnsemblePredictions = Array.isArray(surfaceJson?.ensemble_predictions) ? surfaceJson.ensemble_predictions : []
+      const ensemblePredictions = todayScheduleKeys.size > 0
+        ? rawEnsemblePredictions.filter((row) => {
+            const key = predictionScheduleKey(row)
+            return key ? todayScheduleKeys.has(key) : false
+          })
+        : rawEnsemblePredictions
+
+      setData({
+        ...surfaceJson,
+        playerdeep_predictions: playerdeepPredictions,
+        possession_predictions: possessionPredictions,
+        fourfactor_predictions: fourfactorPredictions,
+        ensemble_predictions: ensemblePredictions,
+      })
     } catch (err) {
       setError(err.message)
     } finally {
@@ -313,7 +419,7 @@ function App() {
 
           <div className="banner-right-title">
             <div className="banner-right-lockup" aria-hidden="true">
-              <img src="/crystalbob-basketball-header-transparent.png" alt="" className="banner-orb banner-orb--right" />
+              <img src="/crystalbob-basketball-mark-v2.png" alt="" className="banner-orb banner-orb--right" />
               <span className="banner-sport-chip">NBA Model</span>
             </div>
           </div>
