@@ -202,15 +202,16 @@ function SportArtwork({ sport }) {
 
 function SportCard({ sport, navigate }) {
   return (
-    <button className={`compact-sport-card ${sport.status}`} onClick={() => navigate(sport.route)}>
-      <div className="compact-sport-artwrap">
-        <SportArtwork sport={sport} />
-      </div>
+    <div className={`compact-sport-card ${sport.status}`}>
+      <button className="compact-sport-tile" onClick={() => navigate(sport.route)} aria-label={`Open ${sport.name}`}>
+        <div className="compact-sport-artwrap">
+          <SportArtwork sport={sport} />
+        </div>
+      </button>
       <div className="compact-sport-meta">
         <strong>{sport.name}</strong>
-        <span className={`compact-status ${sport.status}`}>{sport.shortStatus}</span>
       </div>
-    </button>
+    </div>
   )
 }
 
