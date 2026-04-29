@@ -289,7 +289,7 @@ function App() {
           <div className="banner-brand">
             <div className="banner-copy banner-copy--wide">
               <div className="banner-title-stack">
-                <img src="/crystalbob-title-header-v2.png" alt="CrystalBob" className="banner-title-image" />
+                <span className="banner-title-text">CrystalBob</span>
               </div>
               <div className="banner-meta">
                 <span>Updated {today}</span>
@@ -299,7 +299,7 @@ function App() {
 
           <div className="banner-right-title">
             <div className="banner-right-lockup" aria-hidden="true">
-              <img src="/crystalbob-basketball-header-v4.png" alt="" className="banner-orb banner-orb--right" />
+              <img src="/crystalbob-basketball-header-transparent.png" alt="" className="banner-orb banner-orb--right" />
               <span className="banner-sport-chip">NBA Model</span>
             </div>
           </div>

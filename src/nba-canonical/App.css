@@ -2,13 +2,13 @@
 :root {
   --bg: #050505;
   --card: #0c0c0c;
-  --border: #282112;
-  --accent: #f6e45d;
-  --accent-soft: #d1af3c;
-  --accent-strong: #fff3a0;
+  --border: #2f2f16;
+  --accent: #f5ff3b;
+  --accent-soft: #d9e85b;
+  --accent-strong: #fbffd1;
   --text: #f4efdb;
-  --text-dim: #91886d;
-  --yellow: #e0bb45;
+  --text-dim: #a7a07b;
+  --yellow: #f5ff3b;
   --red: #ff5b5b;
 }
 
@@ -225,7 +225,8 @@ body {
 }
 
 .banner-orb--right {
-  width: 54px;
+  width: 50px;
+  filter: drop-shadow(0 4px 14px rgba(245, 255, 59, 0.14));
 }
 
 .banner-copy {
@@ -250,6 +251,15 @@ body {
   height: 30px;
   width: auto;
   display: block;
+}
+
+.banner-title-text {
+  display: inline-block;
+  color: #f3efdc;
+  font-size: clamp(1.5rem, 2.3vw, 2.1rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
 }
 
 .banner-sport-line {
@@ -291,7 +301,7 @@ body {
   justify-content: flex-end;
   min-height: 54px;
   padding: 4px 0;
-  color: #F5FF3B;
+  color: var(--yellow);
   font-family: Georgia, 'Times New Roman', serif;
   font-size: clamp(2rem, 2.8vw, 2.55rem);
   font-weight: 700;
@@ -435,9 +445,9 @@ body {
   white-space: nowrap;
   line-height: 1.1;
   border-radius: 10px;
-  border: 1px solid rgba(246, 228, 93, 0.14);
+  border: 1px solid rgba(245, 255, 59, 0.16);
   background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-  color: #b2a98f;
+  color: #c7caa8;
   font-size: 0.78rem;
   font-weight: 700;
   cursor: pointer;
@@ -446,16 +456,16 @@ body {
 
 .market-tab:hover {
   color: var(--text);
-  border-color: rgba(246, 228, 93, 0.32);
-  background: rgba(246, 228, 93, 0.05);
+  border-color: rgba(245, 255, 59, 0.34);
+  background: rgba(245, 255, 59, 0.06);
   box-shadow: 0 0 0 1px rgba(255,255,255,0.03) inset;
 }
 
 .market-tab.active {
-  background: linear-gradient(180deg, var(--accent-strong) 0%, var(--accent-soft) 100%);
+  background: linear-gradient(180deg, rgba(251,255,209,0.96) 0%, rgba(217,232,91,0.96) 100%);
   color: #0a0a0a;
-  border-color: rgba(246, 228, 93, 0.62);
-  box-shadow: 0 0 0 1px rgba(246, 228, 93, 0.22), 0 10px 24px rgba(246, 228, 93, 0.14);
+  border-color: rgba(245, 255, 59, 0.68);
+  box-shadow: 0 0 0 1px rgba(245, 255, 59, 0.24), 0 10px 24px rgba(245, 255, 59, 0.12);
 }
 
 .header-right {
