@@ -15,7 +15,7 @@ const sports = [
     category: 'Live Now',
     description: 'Full public preview of the live NBA dashboard for the next few days.',
     summary: 'Live quant board with the real dashboard already running.',
-    asset: '/exports/finals/crystalbob-basketball-final.jpg',
+    asset: '/exports/finals/crystalbob-basketball-final.png',
     route: '/nba',
   },
   {
@@ -298,7 +298,7 @@ function NbaPage() {
             <a className="primary-button" href={NBA_DASHBOARD_URL} target="_blank" rel="noreferrer">Open in new tab</a>
           </div>
         </div>
-        <img src="/exports/finals/crystalbob-basketball-final.jpg" alt="NBA badge" className="sport-hero-badge" />
+        <img src="/exports/finals/crystalbob-basketball-final.png" alt="NBA badge" className="sport-hero-badge" />
       </section>
 
       <PreviewBanner />
