@@ -416,7 +416,6 @@ function App() {
           <div className="banner-brand">
             <div className="banner-copy banner-copy--wide">
               <div className="banner-title-stack banner-title-stack--brand">
-                <img src="/final-brand-assets/transparent/crystalbob-orb-header.png" alt="" className="banner-brand-icon" />
                 <span className="banner-brand-wordmark"><span className="banner-brand-wordmark-light">Crystal</span><span className="banner-brand-wordmark-bold">Bob</span></span>
               </div>
               <div className="banner-meta">
