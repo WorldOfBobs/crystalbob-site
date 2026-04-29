@@ -20,7 +20,7 @@ const sports = [
   },
   {
     key: 'mlb',
-    name: 'Baseball',
+    name: 'MLB',
     status: 'coming-soon',
     shortStatus: 'Coming Soon',
     category: 'Coming Soon',
@@ -31,7 +31,7 @@ const sports = [
   },
   {
     key: 'golf',
-    name: 'Golf',
+    name: 'PGA',
     status: 'coming-soon',
     shortStatus: 'Coming Soon',
     category: 'Coming Soon',
