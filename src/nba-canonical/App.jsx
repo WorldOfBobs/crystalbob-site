@@ -291,6 +291,15 @@ function App() {
     return () => clearInterval(interval)
   }, [fetchPredictions, fetchStatus, fetchResults, fetchLineMovement])
 
+  useEffect(() => {
+    const favicon = document.querySelector("link[rel='icon']")
+    const previousHref = favicon?.getAttribute('href') || ''
+    if (favicon) favicon.setAttribute('href', '/nba-favicon.png')
+    return () => {
+      if (favicon && previousHref) favicon.setAttribute('href', previousHref)
+    }
+  }, [])
+
   const today = new Date().toLocaleDateString('en-US', {
     weekday: 'long',
     month: 'short',
