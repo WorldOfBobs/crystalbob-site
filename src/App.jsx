@@ -225,7 +225,7 @@ function HomePage({ navigate }) {
     <main className="page page-home compact-homepage">
       <section className="home-hero-simple">
         <LogoLockup />
-        <p className="hero-tagline">Model-driven sports market interfaces.</p>
+        <p className="hero-tagline">Model-driven sport prediction dashboards for users looking for an edge.</p>
       </section>
 
       <section className="sports-icon-section" id="staged-lanes">
