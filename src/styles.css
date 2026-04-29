@@ -79,31 +79,18 @@ img {
   align-items: center;
   gap: 12px;
   padding: 0;
-  font-weight: 800;
-  font-size: 1.1rem;
 }
 
-.brand-icon {
-  width: 42px;
-  height: 42px;
+.brand-button-lockup {
+  max-width: min(320px, 48vw);
+}
+
+.brand-lockup-inline {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
   object-fit: contain;
-  object-position: center;
-  filter: saturate(1.08) brightness(1.06);
-}
-
-.brand-wordmark {
-  color: #F5FF3B;
-  letter-spacing: -0.03em;
-  display: inline-flex;
-  align-items: baseline;
-}
-
-.brand-wordmark-light {
-  font-weight: 500;
-}
-
-.brand-wordmark-bold {
-  font-weight: 800;
+  object-position: left center;
 }
 
 .header-actions {
