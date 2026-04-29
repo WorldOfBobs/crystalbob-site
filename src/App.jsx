@@ -3,22 +3,6 @@ import NbaDashboard from './nba/NbaDashboard'
 
 const BRAND_LOCKUP = '/final-brand-assets/black-bg/crystalbob-lockup.png'
 const BRAND_ORB = '/final-brand-assets/black-bg/crystalbob-orb.png'
-const NBA_DASHBOARD_URL = 'https://nba.bobbrowser.com'
-
-const NBA_MARKETS = [
-  'Full-game spreads, moneylines, and totals',
-  'First-half and second-half spreads, moneylines, and totals',
-  'Quarter spreads, moneylines, and totals',
-  'Alternate market views',
-  'Historical result views and supporting board context',
-]
-
-const NBA_MODELS = [
-  'Four-Factor team model',
-  'Player Deep context model',
-  'Possession simulation model',
-  'Ensemble decision layer',
-]
 
 const sports = [
   {
@@ -264,58 +248,7 @@ function HomePage({ navigate }) {
 }
 
 function NbaPage() {
-  return (
-    <main className="page sport-page">
-      <section className="sport-hero live-sport">
-        <div>
-          <span className="eyebrow">CrystalBob NBA</span>
-          <h1>NBA market intelligence</h1>
-          <p>
-            CrystalBob NBA covers full-game, half, quarter, and alternate market structure across spreads, moneylines, and totals.
-            The live dashboard below now renders natively inside the CrystalBob shell.
-          </p>
-        </div>
-        <img src="/exports/finals/crystalbob-basketball-final.png" alt="NBA badge" className="sport-hero-badge" />
-      </section>
-
-      <section className="structure-grid">
-        <article className="structure-card">
-          <span className="pill pill-muted">Markets</span>
-          <h3>Lines covered</h3>
-          <ul>
-            {NBA_MARKETS.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </article>
-
-        <article className="structure-card">
-          <span className="pill pill-muted">Models</span>
-          <h3>Models used</h3>
-          <ul>
-            {NBA_MODELS.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </article>
-      </section>
-
-      <section className="dashboard-frame-shell native-dashboard-shell">
-        <div className="frame-topbar">
-          <div>
-            <strong>NBA Dashboard</strong>
-            <p>Live CrystalBob NBA board now renders natively inside the CrystalBob site shell.</p>
-          </div>
-          <a className="primary-button dashboard-open-link" href={NBA_DASHBOARD_URL} target="_blank" rel="noreferrer">
-            Open NBA Dashboard
-          </a>
-        </div>
-        <div className="native-dashboard-wrap">
-          <NbaDashboard />
-        </div>
-      </section>
-    </main>
-  )
+  return <NbaDashboard />
 }
 
 function ComingSoonPage({ sport, navigate }) {
@@ -397,15 +330,19 @@ export default function App() {
 
   const activeSport = useMemo(() => sports.find((sport) => sport.route === route), [route])
   const isHome = route === '/'
+  const isNba = route === '/nba'
+
+  if (isNba) {
+    return <NbaPage />
+  }
 
   return (
     <div className={`app-shell ${isHome ? 'home-shell' : ''}`}>
       <Header navigate={navigate} />
 
       {route === '/' && <HomePage navigate={navigate} />}
-      {route === '/nba' && <NbaPage />}
-      {route !== '/' && route !== '/nba' && activeSport && <ComingSoonPage sport={activeSport} navigate={navigate} />}
-      {route !== '/' && !activeSport && route !== '/nba' && <MissingPage navigate={navigate} />}
+      {route !== '/' && activeSport && <ComingSoonPage sport={activeSport} navigate={navigate} />}
+      {route !== '/' && !activeSport && <MissingPage navigate={navigate} />}
 
       {!isHome && <Footer />}
     </div>
